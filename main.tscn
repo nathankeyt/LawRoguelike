@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://by20dpmm3ognl"]
+
+[ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://player.tscn" id="1_f7e23"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_splnj"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(576.25, 324.25)
+scale = Vector2(1153.5, 649.5)
+texture = SubResource("CanvasTexture_splnj")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_f7e23")]
+position = Vector2(271, 281)
