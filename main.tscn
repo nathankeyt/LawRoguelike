@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=4 format=3 uid="uid://by20dpmm3ognl"]
 
-[ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://player.tscn" id="1_f7e23"]
+[ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="1_f7e23"]
+[ext_resource type="PackedScene" uid="uid://dd0cjjohqfsxy" path="res://Actors/Enemies/Bosses/boss_1.tscn" id="2_fdolf"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_splnj"]
 
@@ -14,3 +15,6 @@ texture = SubResource("CanvasTexture_splnj")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_f7e23")]
 position = Vector2(271, 281)
+
+[node name="Boss1" parent="." instance=ExtResource("2_fdolf")]
+position = Vector2(566, 127)
