@@ -5,6 +5,9 @@ extends CharacterBody2D
 @export var dash_speed: float = 300.0
 @export var default_projectile_scene: Resource
 @export var spirit_projectile_scene: Resource
+@export var shield_scene: Resource;
+@export var parry_length: float = 0.25;
+@export var parry_speedup: float = 1.5;
 
 @onready var hud: Control = $CanvasLayer/HUD
 
@@ -53,11 +56,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire") and can_shoot:
 		fire_projectile(default_projectile_scene)
 		
-	if event.is_action_pressed("alt_fire"):
-		fire_spirit_projectile(spirit_projectile_scene)
+	#if event.is_action_pressed("alt_fire"):
+		#fire_spirit_projectile(spirit_projectile_scene)
 		
 	if event.is_action_pressed("dash"):
 		dash()
+		
+	if event.is_action_pressed("parry"):
+		parry()
+		
+func parry() -> void:
+	var shield = shield_scene.instantiate()
+	add_child(shield)
+	shield.position += (get_global_mouse_position() - position).normalized() * 20.0
+	shield.look_at(get_global_mouse_position())
+	shield.setup(parry_length, parry_speedup)
 		
 func get_direction() -> Vector2:
 	return Input.get_vector("left", "right", "up", "down")

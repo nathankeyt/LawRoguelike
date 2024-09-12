@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd0cjjohqfsxy"]
+[gd_scene load_steps=14 format=3 uid="uid://dd0cjjohqfsxy"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/Bosses/boss_1.gd" id="1_j017f"]
 [ext_resource type="Texture2D" uid="uid://c8vpd08asu63l" path="res://Sprites/Enemies/Bosses/prosecutor1.png" id="1_u25i5"]
+[ext_resource type="PackedScene" uid="uid://dto78lu4esjuy" path="res://Actors/Projectiles/projectile.tscn" id="2_v564a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vdkk"]
 size = Vector2(27, 63)
@@ -88,6 +89,7 @@ graph_offset = Vector2(-78.1199, -46.53)
 motion_mode = 1
 script = ExtResource("1_j017f")
 animation_tree = NodePath("AnimationTree")
+shoot_projectile_scene = ExtResource("2_v564a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0.5)
@@ -107,3 +109,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_qwyrd")
 anim_player = NodePath("../AnimationPlayer")
 parameters/WalkCycle/blend_position = 0.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

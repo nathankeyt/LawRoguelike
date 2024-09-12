@@ -1,9 +1,10 @@
-[gd_scene load_steps=45 format=3 uid="uid://cltl538t2rv4j"]
+[gd_scene load_steps=46 format=3 uid="uid://cltl538t2rv4j"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_iyvu0"]
 [ext_resource type="PackedScene" uid="uid://dto78lu4esjuy" path="res://Actors/Projectiles/projectile.tscn" id="2_4o8tc"]
 [ext_resource type="Texture2D" uid="uid://bdmgjwdbdcyr0" path="res://Sprites/Player/main_character.png" id="2_dmm8a"]
 [ext_resource type="PackedScene" uid="uid://7n80f5aam5wb" path="res://Actors/Projectiles/spirit_projectile.tscn" id="3_j6k6d"]
+[ext_resource type="PackedScene" uid="uid://doe3lsloyqb36" path="res://Actors/Projectiles/shield.tscn" id="4_66mrn"]
 [ext_resource type="PackedScene" uid="uid://clmmhriv56mb0" path="res://Effects/Scenes/ghost_timer.tscn" id="5_dr63v"]
 [ext_resource type="PackedScene" uid="uid://bc4iy0blf1p5t" path="res://UI/HUD/hud.tscn" id="5_xhsbi"]
 
@@ -395,13 +396,13 @@ states/WalkCycle/node = SubResource("AnimationNodeBlendSpace2D_blvl1")
 states/WalkCycle/position = Vector2(527, 130)
 transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTransition_7r6gi")]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_iyvu0")
-dash_speed = 600.0
 default_projectile_scene = ExtResource("2_4o8tc")
 spirit_projectile_scene = ExtResource("3_j6k6d")
+shield_scene = ExtResource("4_66mrn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

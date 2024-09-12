@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://doe3lsloyqb36"]
+
+[ext_resource type="Texture2D" uid="uid://s3qmgbsixynk" path="res://Sprites/Player/shield.png" id="1_pvnld"]
+[ext_resource type="Script" path="res://Actors/Projectiles/shield.gd" id="1_yl3k1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w12jt"]
+size = Vector2(9, 32.5)
+
+[node name="Shield" type="Area2D" groups=["parry"]]
+script = ExtResource("1_yl3k1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_pvnld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.25)
+rotation = 0.00196842
+shape = SubResource("RectangleShape2D_w12jt")
+
+[node name="ParryTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]

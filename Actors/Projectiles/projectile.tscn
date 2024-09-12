@@ -10,7 +10,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfo37"]
 radius = 4.0
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" groups=["parryable"]]
 script = ExtResource("1_ga7i8")
 hit_effect = ExtResource("2_10h2v")
 
