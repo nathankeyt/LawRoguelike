@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=5 format=3 uid="uid://by20dpmm3ognl"]
 
 [ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="1_f7e23"]
 [ext_resource type="PackedScene" uid="uid://dd0cjjohqfsxy" path="res://Actors/Enemies/Bosses/boss_1.tscn" id="2_fdolf"]
+[ext_resource type="PackedScene" uid="uid://bc4iy0blf1p5t" path="res://UI/HUD/hud.tscn" id="3_m8p8k"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_splnj"]
 
@@ -9,12 +10,20 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(576.25, 324.25)
-scale = Vector2(1153.5, 649.5)
+position = Vector2(292.75, 166.25)
+scale = Vector2(586.5, 333.5)
 texture = SubResource("CanvasTexture_splnj")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_f7e23")]
-position = Vector2(271, 281)
+position = Vector2(149, 208)
+speed = 150.0
 
 [node name="Boss1" parent="." instance=ExtResource("2_fdolf")]
-position = Vector2(566, 127)
+position = Vector2(288, 89)
+
+[node name="HUD" parent="." instance=ExtResource("3_m8p8k")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
