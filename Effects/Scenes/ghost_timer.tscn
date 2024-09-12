@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://clmmhriv56mb0"]
+
+[ext_resource type="Script" path="res://Effects/Scenes/ghost_timer.gd" id="1_h86xx"]
+[ext_resource type="PackedScene" uid="uid://mq4cmtlyq1qg" path="res://Effects/Scenes/ghost.tscn" id="2_lvapo"]
+
+[node name="GhostTimer" type="Timer"]
+script = ExtResource("1_h86xx")
+ghost_scene = ExtResource("2_lvapo")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

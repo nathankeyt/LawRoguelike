@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://mq4cmtlyq1qg"]
+
+[ext_resource type="Script" path="res://Effects/Scenes/ghost.gd" id="1_7n67s"]
+
+[node name="Ghost" type="Sprite2D"]
+script = ExtResource("1_7n67s")
+
+[node name="TimeToLive" type="Timer" parent="."]
+
+[connection signal="timeout" from="TimeToLive" to="." method="_on_time_to_live_timeout"]

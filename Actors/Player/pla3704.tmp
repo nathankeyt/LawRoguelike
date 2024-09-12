@@ -396,7 +396,6 @@ states/WalkCycle/position = Vector2(527, 130)
 transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTransition_7r6gi")]
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
-z_index = 1
 motion_mode = 1
 script = ExtResource("1_iyvu0")
 dash_speed = 600.0
@@ -434,7 +433,7 @@ one_shot = true
 [node name="GhostTimer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_dr63v")]
 wait_time = 0.01
 sprite = NodePath("../Sprite2D")
-color = Color(1.15514e-06, 0.731041, 0.855588, 1)
+ghost_lifespan = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

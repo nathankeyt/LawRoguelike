@@ -1,38 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc4iy0blf1p5t"]
+[gd_scene load_steps=4 format=3 uid="uid://bc4iy0blf1p5t"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_alek1"]
+[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="1_0xitq"]
+[ext_resource type="Texture2D" uid="uid://byborfargr65m" path="res://Sprites/UI/progress.png" id="1_vkidd"]
+[ext_resource type="Texture2D" uid="uid://bycuntkjlbm4a" path="res://Sprites/UI/spirit_power.png" id="2_10e33"]
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="Control" node_paths=PackedStringArray("spirit_bar", "reload_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0xitq")
+spirit_bar = NodePath("MarginContainer/HBoxContainer/SpiritBar")
+reload_bar = NodePath("MarginContainer/HBoxContainer/ReloadBar")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0, 0.501961, 1, 1)
-layout_mode = 0
-offset_left = 12.0
-offset_top = 243.0
-offset_right = 28.0
-offset_bottom = 316.0
-texture = SubResource("CanvasTexture_alek1")
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -84.0
+offset_right = 116.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-modulate = Color(0, 0.501961, 1, 1)
-layout_mode = 0
-offset_left = 61.0
-offset_top = 280.0
-offset_right = 77.0
-offset_bottom = 317.0
-texture = SubResource("CanvasTexture_alek1")
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 396
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-modulate = Color(0, 0.501961, 1, 1)
-layout_mode = 0
-offset_left = 36.0
-offset_top = 260.0
-offset_right = 52.0
-offset_bottom = 316.0
-texture = SubResource("CanvasTexture_alek1")
+[node name="SpiritBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 3.0
+value = 3.0
+fill_mode = 1
+texture_progress = ExtResource("2_10e33")
+tint_progress = Color(1.15514e-06, 0.490694, 0.829483, 1)
+
+[node name="ReloadBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("1_vkidd")
+texture_progress = ExtResource("1_vkidd")
+tint_under = Color(0, 0, 0, 0)
