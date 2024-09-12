@@ -435,7 +435,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="GhostTimer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_dr63v")]
-wait_time = 0.01
+process_callback = 0
+wait_time = 0.015
 sprite = NodePath("../Sprite2D")
 color = Color(1.15514e-06, 0.731041, 0.855588, 1)
 
