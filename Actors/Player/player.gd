@@ -3,21 +3,25 @@ extends CharacterBody2D
 
 @export var speed: float = 150.0
 @export var dash_speed: float = 300.0
-@export var animation_tree: AnimationTree
 @export var default_projectile_scene: Resource
 @export var spirit_projectile_scene: Resource
-@export var ghost_scene: Resource
 
 @onready var hud: Control = $CanvasLayer/HUD
+
+@onready var animation_tree: AnimationTree = $AnimationTree
+
 @onready var reload_timer: Timer = $ReloadTimer
 @onready var dash_timer: Timer = $DashTimer
 @onready var ghost_timer: Timer = $GhostTimer
+@onready var dash_reset_timer: Timer = $DashResetTimer
+
 @onready var character_sprite: Sprite2D = $Sprite2D
 
 var last_direction: Vector2 = Vector2.DOWN
 var spirit_power: int = 3;
 var can_shoot: bool = true;
 var is_dashing: bool = false;
+var can_dash: bool = true;
 
 func _process(delta: float) -> void:
 	var time_left: float = reload_timer.time_left
@@ -61,9 +65,10 @@ func get_direction() -> Vector2:
 func dash() -> void:
 	var direction: Vector2 = get_direction()
 	
-	if direction and not is_dashing:
+	if direction and can_dash:
 		velocity = direction * dash_speed
 		is_dashing = true;
+		can_dash = false;
 		can_shoot = false;
 		dash_timer.start()
 		ghost_timer.start_custom()
@@ -97,3 +102,8 @@ func _on_reload_timer_timeout() -> void:
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
 	can_shoot = true
+	dash_reset_timer.start()
+
+
+func _on_dash_reset_timer_timeout() -> void:
+	can_dash = true
