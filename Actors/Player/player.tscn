@@ -400,6 +400,7 @@ transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTrans
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_iyvu0")
+dash_speed = 450.0
 default_projectile_scene = ExtResource("2_4o8tc")
 spirit_projectile_scene = ExtResource("3_j6k6d")
 shield_scene = ExtResource("4_66mrn")

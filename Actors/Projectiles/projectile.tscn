@@ -33,6 +33,7 @@ texture = SubResource("CanvasTexture_drfsw")
 shape = SubResource("CircleShape2D_gfo37")
 
 [node name="TimeToLive" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 autostart = true
 
