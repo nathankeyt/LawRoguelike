@@ -30,6 +30,7 @@ project/assembly_name="LegalRoguelike"
 
 parryable=""
 parry=""
+invinceable=""
 
 [input]
 

@@ -48,6 +48,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, speed)
 		
 	if not ghost_timer.is_stopped() and velocity.length() <= speed:
+		remove_from_group("invinceable")
 		ghost_timer.stop()
 		
 	move_and_slide()
@@ -83,6 +84,7 @@ func dash() -> void:
 		is_dashing = true;
 		can_dash = false;
 		can_shoot = false;
+		add_to_group("invinceable")
 		dash_timer.start()
 		ghost_timer.start_custom()
 		
