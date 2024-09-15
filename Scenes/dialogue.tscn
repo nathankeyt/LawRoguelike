@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctic3c4lq4as5"]
+
+[ext_resource type="Script" path="res://Scenes/dialogue.gd" id="1_4x27c"]
+[ext_resource type="Texture2D" uid="uid://cgrnxb1x8ig3x" path="res://Sprites/Enemies/Bosses/prosecuter_focused.png" id="1_bpnsa"]
+[ext_resource type="Texture2D" uid="uid://ybcrm0mbvl2d" path="res://Sprites/UI/dialogue_box.png" id="2_is4sh"]
+[ext_resource type="FontFile" uid="uid://bfqvw5m45spwp" path="res://Sprites/UI/Retro Gaming.ttf" id="3_q5rne"]
+[ext_resource type="AudioStream" uid="uid://cqtqmifa25awk" path="res://Actors/Enemies/Bosses/spike_speak.wav" id="5_xp3a6"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ppsli"]
+
+[node name="Dialogue" type="Node2D" node_paths=PackedStringArray("name_label", "dialogue_label", "confirm_label")]
+script = ExtResource("1_4x27c")
+text = "temp"
+char_name = "Spike"
+name_label = NodePath("Control/TextureRect/Name")
+dialogue_label = NodePath("Control/TextureRect/DialogueBox")
+confirm_label = NodePath("Control/TextureRect/Confirm")
+
+[node name="Backdrop" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(288.25, 162.25)
+scale = Vector2(577.5, 325.5)
+texture = SubResource("CanvasTexture_ppsli")
+
+[node name="CharacterPlacement" type="Node2D" parent="."]
+position = Vector2(439, 140)
+
+[node name="ProsecuterFocused" type="Sprite2D" parent="CharacterPlacement"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_bpnsa")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 182.0
+offset_right = 567.0
+offset_bottom = 312.0
+scale = Vector2(0.96, 1)
+texture = ExtResource("2_is4sh")
+
+[node name="Confirm" type="RichTextLabel" parent="Control/TextureRect"]
+visible = false
+offset_left = 508.0
+offset_top = 107.0
+offset_right = 537.0
+offset_bottom = 128.0
+theme_override_fonts/normal_font = ExtResource("3_q5rne")
+theme_override_font_sizes/normal_font_size = 14
+text = ">>"
+
+[node name="DialogueBox" type="RichTextLabel" parent="Control/TextureRect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 518.0
+offset_bottom = 117.0
+theme_override_fonts/normal_font = ExtResource("3_q5rne")
+theme_override_font_sizes/normal_font_size = 14
+
+[node name="Name" type="RichTextLabel" parent="Control/TextureRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 170.0
+offset_bottom = 47.0
+theme_override_fonts/normal_font = ExtResource("3_q5rne")
+theme_override_font_sizes/normal_font_size = 14
+text = "Spike"
+
+[node name="DialogueTimer" type="Timer" parent="."]
+wait_time = 0.075
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xp3a6")
+
+[connection signal="timeout" from="DialogueTimer" to="." method="_on_dialogue_timer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

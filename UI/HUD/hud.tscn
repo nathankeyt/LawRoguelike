@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc4iy0blf1p5t"]
+[gd_scene load_steps=5 format=3 uid="uid://bc4iy0blf1p5t"]
 
 [ext_resource type="Script" path="res://UI/HUD/hud.gd" id="1_0xitq"]
 [ext_resource type="Texture2D" uid="uid://byborfargr65m" path="res://Sprites/UI/progress.png" id="1_vkidd"]
 [ext_resource type="Texture2D" uid="uid://bycuntkjlbm4a" path="res://Sprites/UI/spirit_power.png" id="2_10e33"]
+[ext_resource type="FontFile" uid="uid://bfqvw5m45spwp" path="res://Sprites/UI/Retro Gaming.ttf" id="3_atvm1"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("spirit_bar", "reload_bar")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("spirit_bar", "reload_bar", "talk_tip_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_0xitq")
 spirit_bar = NodePath("MarginContainer/HBoxContainer/SpiritBar")
 reload_bar = NodePath("MarginContainer/HBoxContainer/ReloadBar")
+talk_tip_label = NodePath("MarginContainer/RichTextLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -21,7 +23,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -84.0
-offset_right = 116.0
+offset_right = 576.0
 grow_vertical = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -47,3 +49,13 @@ fill_mode = 4
 texture_under = ExtResource("1_vkidd")
 texture_progress = ExtResource("1_vkidd")
 tint_under = Color(0, 0, 0, 0)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+visible = false
+z_index = 1
+clip_contents = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_atvm1")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]Press [] to talk[/center]"

@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var speed: float = 150.0
 @export var dash_speed: float = 300.0
 @export var default_projectile_scene: Resource
@@ -8,6 +7,8 @@ extends CharacterBody2D
 @export var shield_scene: Resource;
 @export var parry_length: float = 0.25;
 @export var parry_speedup: float = 1.5;
+@export var dialogue_node: Node2D;
+@export var map: Node2D;
 
 @onready var hud: Control = $CanvasLayer/HUD
 
@@ -25,11 +26,14 @@ var spirit_power: int = 3;
 var can_shoot: bool = true;
 var is_dashing: bool = false;
 var can_dash: bool = true;
+var talkable_char: Node2D;
 
 func _process(delta: float) -> void:
 	var time_left: float = reload_timer.time_left
 	if time_left:
 		hud.set_reload_bar_ratio((reload_timer.wait_time - time_left) / reload_timer.wait_time)
+		
+	
 		
 
 func _physics_process(delta: float) -> void:
@@ -65,6 +69,20 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("parry"):
 		parry()
+		
+	if event.is_action_pressed("talk"):
+		talk()
+		
+func talk() -> void:
+	if not talkable_char:
+		return
+		
+	dialogue_node.show()
+	dialogue_node.set_text("Wowza, haven't had visitors here in a while!")
+	dialogue_node.play()
+	hud.hide()
+	map.hide()
+	
 		
 func parry() -> void:
 	var shield = shield_scene.instantiate()
@@ -122,3 +140,15 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_reset_timer_timeout() -> void:
 	can_dash = true
+
+
+func _on_dialogue_cast_body_entered(body: Node2D) -> void:
+	if body.is_in_group("talkable"):
+		hud.talk_enable()
+		talkable_char = body
+
+
+func _on_dialogue_cast_body_exited(body: Node2D) -> void:
+	if body.is_in_group("talkable"):
+		hud.talk_disable()
+		talkable_char = null

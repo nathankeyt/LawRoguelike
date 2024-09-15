@@ -85,7 +85,7 @@ states/WalkCycle/position = Vector2(495.88, 100.243)
 transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTransition_3smm6")]
 graph_offset = Vector2(-78.1199, -46.53)
 
-[node name="Boss1" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
+[node name="Boss1" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree") groups=["talkable"]]
 motion_mode = 1
 script = ExtResource("1_j017f")
 animation_tree = NodePath("AnimationTree")

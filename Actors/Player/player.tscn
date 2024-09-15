@@ -1,10 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://cltl538t2rv4j"]
+[gd_scene load_steps=47 format=3 uid="uid://cltl538t2rv4j"]
 
 [ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_iyvu0"]
 [ext_resource type="PackedScene" uid="uid://dto78lu4esjuy" path="res://Actors/Projectiles/projectile.tscn" id="2_4o8tc"]
 [ext_resource type="Texture2D" uid="uid://bdmgjwdbdcyr0" path="res://Sprites/Player/main_character.png" id="2_dmm8a"]
 [ext_resource type="PackedScene" uid="uid://7n80f5aam5wb" path="res://Actors/Projectiles/spirit_projectile.tscn" id="3_j6k6d"]
-[ext_resource type="PackedScene" uid="uid://doe3lsloyqb36" path="res://Actors/Projectiles/shield.tscn" id="4_66mrn"]
+[ext_resource type="PackedScene" path="res://Actors/Projectiles/shield.tscn" id="4_66mrn"]
 [ext_resource type="PackedScene" uid="uid://clmmhriv56mb0" path="res://Effects/Scenes/ghost_timer.tscn" id="5_dr63v"]
 [ext_resource type="PackedScene" uid="uid://bc4iy0blf1p5t" path="res://UI/HUD/hud.tscn" id="5_xhsbi"]
 
@@ -396,6 +396,9 @@ states/WalkCycle/node = SubResource("AnimationNodeBlendSpace2D_blvl1")
 states/WalkCycle/position = Vector2(527, 130)
 transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTransition_7r6gi")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5b0h5"]
+radius = 30.0167
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 motion_mode = 1
@@ -456,7 +459,14 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="DialogueCast" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueCast"]
+shape = SubResource("CircleShape2D_5b0h5")
+
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashResetTimer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="body_entered" from="DialogueCast" to="." method="_on_dialogue_cast_body_entered"]
+[connection signal="body_exited" from="DialogueCast" to="." method="_on_dialogue_cast_body_exited"]
