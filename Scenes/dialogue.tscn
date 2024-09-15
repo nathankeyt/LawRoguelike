@@ -16,6 +16,7 @@ name_label = NodePath("Control/TextureRect/Name")
 dialogue_label = NodePath("Control/TextureRect/DialogueBox")
 confirm_label = NodePath("Control/TextureRect/Confirm")
 low_pitch = 0.5
+high_pitch = 1.5
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
