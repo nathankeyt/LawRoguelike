@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cgrnxb1x8ig3x" path="res://Sprites/Enemies/Bosses/prosecuter_focused.png" id="1_bpnsa"]
 [ext_resource type="Texture2D" uid="uid://ybcrm0mbvl2d" path="res://Sprites/UI/dialogue_box.png" id="2_is4sh"]
 [ext_resource type="FontFile" uid="uid://bfqvw5m45spwp" path="res://Sprites/UI/Retro Gaming.ttf" id="3_q5rne"]
-[ext_resource type="AudioStream" uid="uid://cqtqmifa25awk" path="res://Actors/Enemies/Bosses/spike_speak.wav" id="5_xp3a6"]
+[ext_resource type="AudioStream" uid="uid://cbncligtvimyd" path="res://Actors/Enemies/Bosses/spike_voice.wav" id="5_t2mxk"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ppsli"]
 
@@ -15,6 +15,7 @@ char_name = "Spike"
 name_label = NodePath("Control/TextureRect/Name")
 dialogue_label = NodePath("Control/TextureRect/DialogueBox")
 confirm_label = NodePath("Control/TextureRect/Confirm")
+low_pitch = 0.5
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -46,6 +47,7 @@ texture = ExtResource("2_is4sh")
 
 [node name="Confirm" type="RichTextLabel" parent="Control/TextureRect"]
 visible = false
+layout_mode = 0
 offset_left = 508.0
 offset_top = 107.0
 offset_right = 537.0
@@ -80,7 +82,8 @@ wait_time = 0.075
 wait_time = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_xp3a6")
+stream = ExtResource("5_t2mxk")
+pitch_scale = 0.6
 
 [connection signal="timeout" from="DialogueTimer" to="." method="_on_dialogue_timer_timeout"]
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

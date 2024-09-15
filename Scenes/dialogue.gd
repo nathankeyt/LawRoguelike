@@ -5,6 +5,8 @@ extends Node2D
 @export var name_label: RichTextLabel
 @export var dialogue_label: RichTextLabel
 @export var confirm_label: RichTextLabel
+@export var low_pitch: float = 1.0
+@export var high_pitch: float = 1.0
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var dialogue_timer: Timer = $DialogueTimer
@@ -59,6 +61,7 @@ func _on_dialogue_timer_timeout() -> void:
 		
 	var new_char: String = text[dialogue_index]
 	if new_char != " ":
+		audio_player.pitch_scale = randf_range(low_pitch, high_pitch)
 		audio_player.play()
 	dialogue_label.add_text(new_char)
 	dialogue_index += 1
