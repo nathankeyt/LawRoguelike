@@ -8,8 +8,10 @@
 radius = 8.06226
 
 [node name="ChainProjectile" type="Area2D" groups=["parryable"]]
+scale = Vector2(1, 1.00871)
 script = ExtResource("1_mkmcl")
 hit_effect = ExtResource("2_6jycg")
+active_time = 5.0
 
 [node name="Chain" parent="." instance=ExtResource("2_ivoyy")]
 scale = Vector2(1.00449, 1)
