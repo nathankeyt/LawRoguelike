@@ -2,6 +2,9 @@ extends Area2D
 
 @export var hit_effect: Resource
 @export var target: Area2D
+@export var rotation_rate: float = 10.0
+
+@onready var sprite: Sprite2D = $MainSprite
 
 var velocity: Vector2 = Vector2(0, 0)
 
@@ -26,6 +29,7 @@ func scale_target() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
+	sprite.rotation += rotation_rate
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("invinceable"):

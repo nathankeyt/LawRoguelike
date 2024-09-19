@@ -22,7 +22,6 @@ func fire(forward: Vector2, speed: float) -> void:
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	if chain_target:
-		print(chain_target.global_position)
 		chain_end.global_position = chain_target.global_position
 		var relative_target_pos: Vector2 = chain_target.global_position - global_position
 		if relative_target_pos.length()	 > chain_range:
@@ -34,7 +33,7 @@ func _on_time_to_live_timeout() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("invinceable"):
+	if body.is_in_group("invinceable") or chain_target:
 		return
 		
 	if body.is_in_group("targetable"):

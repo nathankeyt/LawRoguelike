@@ -461,6 +461,8 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="DialogueCast" type="Area2D" parent="."]
+collision_layer = 15
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueCast"]
 shape = SubResource("CircleShape2D_5b0h5")

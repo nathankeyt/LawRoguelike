@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dd0cjjohqfsxy"]
+[gd_scene load_steps=19 format=3 uid="uid://dd0cjjohqfsxy"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/Bosses/boss_1.gd" id="1_j017f"]
 [ext_resource type="Texture2D" uid="uid://c8vpd08asu63l" path="res://Sprites/Enemies/Bosses/prosecutor1.png" id="1_u25i5"]
 [ext_resource type="PackedScene" uid="uid://bcdk3hewkrvu2" path="res://chain_projectile.tscn" id="2_jhhxj"]
 [ext_resource type="PackedScene" uid="uid://dos7u2p12fwfr" path="res://Actors/Projectiles/aerial_scene.tscn" id="3_ekw71"]
 [ext_resource type="PackedScene" uid="uid://caej6m8fhs1es" path="res://Components/projectile_launcher.tscn" id="4_sf8kw"]
+[ext_resource type="Script" path="res://idle.gd" id="6_cf03u"]
+[ext_resource type="Script" path="res://chasing.gd" id="7_v8dnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vdkk"]
 size = Vector2(27, 63)
@@ -87,12 +89,17 @@ states/WalkCycle/position = Vector2(495.88, 100.243)
 transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTransition_3smm6")]
 graph_offset = Vector2(-78.1199, -46.53)
 
-[node name="Boss1" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree") groups=["talkable"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0p324"]
+radius = 150.0
+
+[node name="Boss1" type="CharacterBody2D" node_paths=PackedStringArray("initial_state") groups=["talkable"]]
+collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_j017f")
-animation_tree = NodePath("AnimationTree")
 shoot_projectile_scene = ExtResource("2_jhhxj")
 aerial_scene = ExtResource("3_ekw71")
+aerial_speed = 350.0
+initial_state = NodePath("States/Idle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0.5)
@@ -118,5 +125,20 @@ wait_time = 2.0
 autostart = true
 
 [node name="ProjectileLauncher" parent="." instance=ExtResource("4_sf8kw")]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("6_cf03u")
+min_distance = 135.0
+
+[node name="Chasing" type="Node" parent="States"]
+script = ExtResource("7_v8dnv")
+target_spacing = 125.0
+
+[node name="DetectionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_0p324")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

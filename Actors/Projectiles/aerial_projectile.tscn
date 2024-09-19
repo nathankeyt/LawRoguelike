@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://djsjg3qddd0ks"]
+[gd_scene load_steps=5 format=3 uid="uid://djsjg3qddd0ks"]
 
 [ext_resource type="Script" path="res://Actors/Projectiles/aerial_projectile.gd" id="1_4rp0l"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="2_0v8rh"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_3wrpm"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_7sa3x"]
+[ext_resource type="Texture2D" uid="uid://cs0gowgpigk7j" path="res://Sprites/spin_attack.png" id="3_mjp1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vwoc"]
 size = Vector2(29, 20)
@@ -13,16 +10,11 @@ size = Vector2(29, 20)
 [node name="AerialProjectile" type="Area2D"]
 script = ExtResource("1_4rp0l")
 hit_effect = ExtResource("2_0v8rh")
+rotation_rate = 5.0
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.293745, 0.231067, 1)
-scale = Vector2(20, 20)
-texture = SubResource("CanvasTexture_3wrpm")
-
-[node name="Sprite2D" type="Sprite2D" parent="MainSprite"]
-position = Vector2(0.6, 0)
-scale = Vector2(0.7, 0.678)
-texture = SubResource("CanvasTexture_7sa3x")
+texture = ExtResource("3_mjp1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4.5, 0)
