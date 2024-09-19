@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://b5fp013mx5nda"]
+
+[node name="ChainJoint" type="PinJoint2D"]
+bias = 0.9

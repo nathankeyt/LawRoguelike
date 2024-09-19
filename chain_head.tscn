@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci10si41n6f57"]
+
+[ext_resource type="Texture2D" uid="uid://eqbu8l252i6f" path="res://Sprites/chain.png" id="1_bkusi"]
+[ext_resource type="Script" path="res://chain_head.gd" id="1_jhunt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2elg"]
+radius = 8.06226
+
+[node name="ChainHead" type="AnimatableBody2D"]
+script = ExtResource("1_jhunt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bkusi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k2elg")

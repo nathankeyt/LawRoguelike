@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://br3db1klup534"]
+
+[ext_resource type="Texture2D" uid="uid://eqbu8l252i6f" path="res://Sprites/chain.png" id="1_1k3dn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bsnpw"]
+radius = 8.06226
+
+[node name="ChainLink" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1k3dn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bsnpw")

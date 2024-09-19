@@ -58,9 +58,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("fire") and can_shoot:
-		fire_projectile(default_projectile_scene)
-		
 	#if event.is_action_pressed("alt_fire"):
 		#fire_spirit_projectile(spirit_projectile_scene)
 		
@@ -107,24 +104,9 @@ func dash() -> void:
 		ghost_timer.start_custom()
 		
 
-
-func fire_projectile(projectile_scene: Resource) -> void:
-	can_shoot = false;
-	hud.set_reload_bar_ratio(0.0)
-	reload_timer.start()
-	
-	var new_projectile: Area2D = projectile_scene.instantiate()
-	get_parent().add_child(new_projectile)
-	
-	print(get_viewport().get_mouse_position())
-		
-	var projectile_forward: Vector2 = (get_global_mouse_position() - position).normalized()
-	new_projectile.fire(projectile_forward, 1000.0)
-	new_projectile.position = position + (projectile_forward * 20.0)
-
 func fire_spirit_projectile(projectile_scene: Resource) -> void:
 	spirit_power -= 1;
-	fire_projectile(projectile_scene);
+	#fire_projectile(projectile_scene);
 	
 
 func _on_reload_timer_timeout() -> void:

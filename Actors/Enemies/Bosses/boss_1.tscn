@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd0cjjohqfsxy"]
+[gd_scene load_steps=16 format=3 uid="uid://dd0cjjohqfsxy"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/Bosses/boss_1.gd" id="1_j017f"]
 [ext_resource type="Texture2D" uid="uid://c8vpd08asu63l" path="res://Sprites/Enemies/Bosses/prosecutor1.png" id="1_u25i5"]
-[ext_resource type="PackedScene" uid="uid://dto78lu4esjuy" path="res://Actors/Projectiles/projectile.tscn" id="2_v564a"]
+[ext_resource type="PackedScene" uid="uid://bcdk3hewkrvu2" path="res://chain_projectile.tscn" id="2_jhhxj"]
+[ext_resource type="PackedScene" uid="uid://dos7u2p12fwfr" path="res://Actors/Projectiles/aerial_scene.tscn" id="3_ekw71"]
+[ext_resource type="PackedScene" uid="uid://caej6m8fhs1es" path="res://Components/projectile_launcher.tscn" id="4_sf8kw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vdkk"]
 size = Vector2(27, 63)
@@ -89,7 +91,8 @@ graph_offset = Vector2(-78.1199, -46.53)
 motion_mode = 1
 script = ExtResource("1_j017f")
 animation_tree = NodePath("AnimationTree")
-shoot_projectile_scene = ExtResource("2_v564a")
+shoot_projectile_scene = ExtResource("2_jhhxj")
+aerial_scene = ExtResource("3_ekw71")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0.5)
@@ -113,5 +116,7 @@ parameters/WalkCycle/blend_position = 0.0
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="ProjectileLauncher" parent="." instance=ExtResource("4_sf8kw")]
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

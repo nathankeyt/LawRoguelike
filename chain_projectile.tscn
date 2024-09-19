@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcdk3hewkrvu2"]
+
+[ext_resource type="Script" path="res://Actors/Projectiles/projectile.gd" id="1_r0wmh"]
+[ext_resource type="PackedScene" uid="uid://j6qif8sxhbn6" path="res://chain.tscn" id="2_ivoyy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6rwhm"]
+radius = 8.06226
+
+[node name="ChainProjectile" type="Area2D" groups=["parryable"]]
+script = ExtResource("1_r0wmh")
+
+[node name="Chain" parent="." instance=ExtResource("2_ivoyy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6rwhm")

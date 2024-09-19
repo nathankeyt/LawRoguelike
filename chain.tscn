@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://j6qif8sxhbn6"]
+
+[ext_resource type="PackedScene" uid="uid://ci10si41n6f57" path="res://chain_head.tscn" id="1_nyv7b"]
+[ext_resource type="PackedScene" uid="uid://br3db1klup534" path="res://chain_link.tscn" id="1_vyoxs"]
+[ext_resource type="PackedScene" uid="uid://b5fp013mx5nda" path="res://chain_joint.tscn" id="2_copb7"]
+
+[node name="Chain" type="Node2D"]
+
+[node name="ChainHead" parent="." instance=ExtResource("1_nyv7b")]
+collision_layer = 0
+collision_mask = 0
+
+[node name="ChainJoint" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-7, 0)
+node_a = NodePath("../ChainHead")
+node_b = NodePath("../ChainLink2")
+
+[node name="ChainLink2" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-13, 0)
+
+[node name="ChainJoint2" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-20, 0)
+node_a = NodePath("../ChainLink2")
+node_b = NodePath("../ChainLink3")
+
+[node name="ChainLink3" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-26, 0)
+
+[node name="ChainJoint3" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-33, 0)
+node_a = NodePath("../ChainLink3")
+node_b = NodePath("../ChainLink4")
+
+[node name="ChainLink4" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-39, 0)
+
+[node name="ChainJoint4" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-46, 0)
+node_a = NodePath("../ChainLink4")
+node_b = NodePath("../ChainLink5")
+
+[node name="ChainLink5" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-52, 0)
+
+[node name="ChainJoint5" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-59, 0)
+node_a = NodePath("../ChainLink5")
+node_b = NodePath("../ChainLink6")
+
+[node name="ChainLink6" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-65, 0)
+
+[node name="ChainJoint6" parent="." instance=ExtResource("2_copb7")]
+position = Vector2(-72, 0)
+node_a = NodePath("../ChainLink6")
+node_b = NodePath("../ChainLink7")
+
+[node name="ChainLink7" parent="." instance=ExtResource("1_vyoxs")]
+position = Vector2(-79, 0)

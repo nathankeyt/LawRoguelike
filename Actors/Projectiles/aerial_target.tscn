@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvm4fwxlke4bp"]
+
+[ext_resource type="Texture2D" uid="uid://5x6yxeedb6ve" path="res://Sprites/shadow.png" id="1_mn8mu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcpl4"]
+size = Vector2(63, 28.6031)
+
+[node name="AerialTarget" type="Area2D" groups=["aerial_target"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.516961, 0, 0.00556675, 1)
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_mn8mu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 3)
+scale = Vector2(1, 0.209767)
+shape = SubResource("RectangleShape2D_vcpl4")

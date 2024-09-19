@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dos7u2p12fwfr"]
+
+[ext_resource type="PackedScene" uid="uid://cvm4fwxlke4bp" path="res://Actors/Projectiles/aerial_target.tscn" id="1_85m7h"]
+[ext_resource type="PackedScene" uid="uid://djsjg3qddd0ks" path="res://Actors/Projectiles/aerial_projectile.tscn" id="2_0ngvi"]
+
+[node name="aerial_scene" type="Node2D"]
+visible = false
+
+[node name="AerialTarget" parent="." instance=ExtResource("1_85m7h")]
+
+[node name="AerialProjectile" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_0ngvi")]
+position = Vector2(0, -95)
+target = NodePath("../AerialTarget")

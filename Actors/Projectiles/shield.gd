@@ -22,6 +22,8 @@ func _on_parry_timer_timeout() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("parryable"):
+		if "target" in area:
+			area.target.queue_free()
 		area.velocity = area.velocity.bounce(Vector2.from_angle(rotation)) * parry_speedup
-		area.look_at(area.position + area.velocity.normalized())
+		area.look_at(area.global_position + area.velocity.normalized())
 		

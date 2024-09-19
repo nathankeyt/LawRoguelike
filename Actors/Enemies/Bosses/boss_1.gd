@@ -2,8 +2,14 @@ extends CharacterBody2D
 
 @export var animation_tree: AnimationTree
 @export var shoot_projectile_scene: Resource
+@export var aerial_scene: Resource
 @export var player: CharacterBody2D
 @export var projectile_speed: float = 250.0
+@export var aerial_speed: float = 100.0
+
+@onready var projectile_launcher: Node2D = $ProjectileLauncher
+
+var shoot_aerial: bool = false
 
 func _physics_process(delta: float) -> void:
 	
@@ -13,14 +19,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func fire_projectile(projectile_scene: Resource, target_pos: Vector2) -> void:
-	var new_projectile: Area2D = projectile_scene.instantiate()
-	get_parent().add_child(new_projectile)
-		
-	var projectile_forward: Vector2 = (target_pos - position).normalized()
-	new_projectile.fire(projectile_forward, projectile_speed)
-	new_projectile.position = position + (projectile_forward * 40.0)
-
-
 func _on_shoot_timer_timeout() -> void:
-	fire_projectile(shoot_projectile_scene, player.position)
+	if shoot_aerial:
+		projectile_launcher.fire_aerial(aerial_scene, player.position, projectile_speed, 100.0, self)
+	else:
+		projectile_launcher.fire_projectile(shoot_projectile_scene, player.position, projectile_speed, 40.0, self)
+	shoot_aerial = !shoot_aerial
