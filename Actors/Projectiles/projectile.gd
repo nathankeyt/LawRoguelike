@@ -19,7 +19,7 @@ func _on_time_to_live_timeout() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("invinceable"):
 		return
-		
+
 	var hit_effect: GPUParticles2D = hit_effect.instantiate()
 	get_parent().add_child(hit_effect)
 	hit_effect.position = position

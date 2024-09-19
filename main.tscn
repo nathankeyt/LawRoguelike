@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=7 format=4 uid="uid://by20dpmm3ognl"]
 
 [ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="1_f7e23"]
 [ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_o00jw"]
 [ext_resource type="PackedScene" uid="uid://dd0cjjohqfsxy" path="res://Actors/Enemies/Bosses/boss_1.tscn" id="2_fdolf"]
 [ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="4_7g8jk"]
-[ext_resource type="PackedScene" uid="uid://cjqulh0glkpxm" path="res://Actors/Enemies/basic_enemy.tscn" id="4_u4dsh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5tpko"]
 texture = ExtResource("1_o00jw")
@@ -48,9 +47,6 @@ tile_set = SubResource("TileSet_0lo44")
 position = Vector2(149, 208)
 dialogue_node = NodePath("../../Dialogue")
 map = NodePath("..")
-
-[node name="BasicEnemy" parent="Map" instance=ExtResource("4_u4dsh")]
-position = Vector2(46, 130)
 
 [node name="Boss1" parent="Map" node_paths=PackedStringArray("player") instance=ExtResource("2_fdolf")]
 position = Vector2(288, 89)

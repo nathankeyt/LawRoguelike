@@ -399,7 +399,7 @@ transitions = ["Start", "WalkCycle", SubResource("AnimationNodeStateMachineTrans
 [sub_resource type="CircleShape2D" id="CircleShape2D_5b0h5"]
 radius = 30.0167
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["targetable"]]
 z_index = 1
 collision_layer = 15
 motion_mode = 1

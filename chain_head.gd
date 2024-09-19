@@ -1,14 +1,9 @@
 extends AnimatableBody2D
 
+@onready var start_position: Vector2 = position
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+var can_move: bool = true
 	
 func _physics_process(delta: float) -> void:
-	position = Vector2(0.0, 0.0)
+	if can_move:
+		position = start_position

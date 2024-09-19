@@ -7,11 +7,10 @@
 [node name="Chain" type="Node2D"]
 
 [node name="ChainHead" parent="." instance=ExtResource("1_nyv7b")]
-collision_layer = 0
-collision_mask = 0
 
 [node name="ChainJoint" parent="." instance=ExtResource("2_copb7")]
 position = Vector2(-7, 0)
+scale = Vector2(1, 0.978709)
 node_a = NodePath("../ChainHead")
 node_b = NodePath("../ChainLink2")
 
@@ -53,7 +52,7 @@ position = Vector2(-65, 0)
 [node name="ChainJoint6" parent="." instance=ExtResource("2_copb7")]
 position = Vector2(-72, 0)
 node_a = NodePath("../ChainLink6")
-node_b = NodePath("../ChainLink7")
+node_b = NodePath("../ChainEnd")
 
-[node name="ChainLink7" parent="." instance=ExtResource("1_vyoxs")]
+[node name="ChainEnd" parent="." instance=ExtResource("1_nyv7b")]
 position = Vector2(-79, 0)

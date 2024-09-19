@@ -7,6 +7,8 @@
 radius = 8.06226
 
 [node name="ChainHead" type="AnimatableBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_jhunt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
