@@ -426,7 +426,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_lt2aq")
 anim_player = NodePath("../AnimationPlayer")
-parameters/WalkCycle/blend_position = Vector2(0, 0)
+parameters/WalkCycle/blend_position = Vector2(0.197619, 0.30343)
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.25

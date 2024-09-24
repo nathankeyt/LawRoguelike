@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=10 format=4 uid="uid://by20dpmm3ognl"]
 
 [ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="1_f7e23"]
 [ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_o00jw"]
 [ext_resource type="PackedScene" uid="uid://dd0cjjohqfsxy" path="res://Actors/Enemies/Bosses/boss_1.tscn" id="2_fdolf"]
+[ext_resource type="PackedScene" uid="uid://cjqulh0glkpxm" path="res://Actors/Enemies/basic_enemy.tscn" id="3_sp5ik"]
 [ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="4_7g8jk"]
+[ext_resource type="Script" path="res://mallet_spawner.gd" id="5_tcagk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5tpko"]
 texture = ExtResource("1_o00jw")
@@ -13,14 +15,10 @@ texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -34,6 +32,12 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5tpko")
+
+[sub_resource type="Curve2D" id="Curve2D_lba0h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 25, 117, 0, 0, 0, 0, 19, 232, 0, 0, 0, 0, 153, 319, 0, 0, 0, 0, 482, 314, 0, 0, 0, 0, 479, 244, 0, 0, 0, 0, 559, 239, 0, 0, 0, 0, 555, 117, 0, 0, 0, 0, 370, 109, 0, 0, 0, 0, 365, 22, 0, 0, 0, 0, 216, 23, 0, 0, 0, 0, 209, 114, 0, 0, 0, 0, 24, 116)
+}
+point_count = 12
 
 [node name="Main" type="Node2D"]
 
@@ -52,5 +56,22 @@ map = NodePath("..")
 position = Vector2(288, 89)
 player = NodePath("../Player")
 
+[node name="Path2D" type="Path2D" parent="Map"]
+curve = SubResource("Curve2D_lba0h")
+
+[node name="MalletSpawner" type="PathFollow2D" parent="Map/Path2D" node_paths=PackedStringArray("target")]
+position = Vector2(192.837, 318.395)
+rotation = -0.0151964
+progress = 314.769
+script = ExtResource("5_tcagk")
+mallet_scene = ExtResource("3_sp5ik")
+target = NodePath("../../Player")
+
+[node name="SpawnRate" type="Timer" parent="Map/Path2D/MalletSpawner"]
+wait_time = 2.0
+autostart = true
+
 [node name="Dialogue" parent="." instance=ExtResource("4_7g8jk")]
 visible = false
+
+[connection signal="timeout" from="Map/Path2D/MalletSpawner/SpawnRate" to="Map/Path2D/MalletSpawner" method="_on_spawn_rate_timeout"]

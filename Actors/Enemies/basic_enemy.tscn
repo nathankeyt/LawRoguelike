@@ -1,39 +1,166 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjqulh0glkpxm"]
+[gd_scene load_steps=15 format=3 uid="uid://cjqulh0glkpxm"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/basic_enemy.gd" id="1_xvub2"]
-[ext_resource type="Script" path="res://idle.gd" id="2_w07ra"]
-[ext_resource type="Script" path="res://chasing.gd" id="3_vw7k6"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_ksb3a"]
+[ext_resource type="Texture2D" uid="uid://cffo6akcmcehr" path="res://Sprites/Enemies/mallet.png" id="2_2qfd8"]
+[ext_resource type="Script" path="res://Actors/Enemies/charging.gd" id="4_diewp"]
+[ext_resource type="Script" path="res://chasing_mallet.gd" id="4_fx8j7"]
+[ext_resource type="Script" path="res://Actors/Enemies/startup.gd" id="4_xvv8p"]
+[ext_resource type="Script" path="res://Actors/Enemies/flying.gd" id="5_401w4"]
+[ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="6_rhmf6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yy7"]
-size = Vector2(15, 15)
+size = Vector2(26, 28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8jpl"]
-radius = 50.0
+radius = 17.0
+
+[sub_resource type="Animation" id="Animation_fob20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ob063"]
+resource_name = "charge"
+length = 0.2667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, -3.14159, -4.71239]
+}
+
+[sub_resource type="Animation" id="Animation_q3li7"]
+resource_name = "fly"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_piuo4"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iveol"]
+_data = {
+"RESET": SubResource("Animation_fob20"),
+"charge": SubResource("Animation_ob063"),
+"fly": SubResource("Animation_q3li7"),
+"walk": SubResource("Animation_piuo4")
+}
 
 [node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_xvub2")
-initial_state = NodePath("States/Idle")
+initial_state = NodePath("States/Startup")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
-scale = Vector2(15, 15)
-texture = SubResource("CanvasTexture_ksb3a")
+texture = ExtResource("2_2qfd8")
+hframes = 3
+vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_j5yy7")
 
 [node name="States" type="Node" parent="."]
 
-[node name="Idle" type="Node" parent="States"]
-script = ExtResource("2_w07ra")
-
 [node name="Chasing" type="Node" parent="States"]
-script = ExtResource("3_vw7k6")
+script = ExtResource("4_fx8j7")
 
-[node name="DetectionRange" type="Area2D" parent="."]
+[node name="Startup" type="Node" parent="States"]
+script = ExtResource("4_xvv8p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+[node name="Charging" type="Node" parent="States"]
+script = ExtResource("4_diewp")
+
+[node name="Flying" type="Node" parent="States"]
+script = ExtResource("5_401w4")
+hit_effect = ExtResource("6_rhmf6")
+
+[node name="HitRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitRange"]
 shape = SubResource("CircleShape2D_v8jpl")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iveol")
+}
+
+[connection signal="body_entered" from="HitRange" to="States/Flying" method="_on_hit_range_body_entered"]
