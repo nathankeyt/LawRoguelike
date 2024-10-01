@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://7nusbt4flwao"]
+
+[ext_resource type="Script" path="res://boss_facade.gd" id="1_lsuls"]
+[ext_resource type="Texture2D" uid="uid://c8vpd08asu63l" path="res://Sprites/Enemies/Bosses/prosecutor1.png" id="1_wlqjp"]
+
+[sub_resource type="Animation" id="Animation_2snyw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_njsra"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_v3csp"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i577p"]
+_data = {
+"RESET": SubResource("Animation_2snyw"),
+"idle": SubResource("Animation_njsra"),
+"walk": SubResource("Animation_v3csp")
+}
+
+[node name="BossFacade" type="PathFollow2D"]
+script = ExtResource("1_lsuls")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wlqjp")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i577p")
+}
+
+[node name="StartTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

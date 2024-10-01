@@ -93,7 +93,7 @@ graph_offset = Vector2(-78.1199, -46.53)
 radius = 150.0
 
 [node name="Boss1" type="CharacterBody2D" node_paths=PackedStringArray("initial_state") groups=["talkable"]]
-collision_layer = 8
+collision_layer = 15
 motion_mode = 1
 script = ExtResource("1_j017f")
 shoot_projectile_scene = ExtResource("2_jhhxj")
@@ -122,7 +122,6 @@ parameters/WalkCycle/blend_position = 0.0
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="ProjectileLauncher" parent="." instance=ExtResource("4_sf8kw")]
 

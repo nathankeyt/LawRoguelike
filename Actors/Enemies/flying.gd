@@ -34,6 +34,7 @@ func _on_hit_range_body_entered(other: Node2D) -> void:
 		
 func handle_collision(other: Node2D) -> void:
 	var hit_effect: GPUParticles2D = hit_effect.instantiate()
+	other.emit_signal("hit")
 	body.get_parent().add_child(hit_effect)
 	hit_effect.position = body.global_position
 	hit_effect.emitting = true

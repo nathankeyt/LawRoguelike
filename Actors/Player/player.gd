@@ -28,16 +28,21 @@ var is_dashing: bool = false;
 var can_dash: bool = true;
 var talkable_char: Node2D;
 
+signal hit;
+
+func _ready() -> void:
+	global_position = PlayerManager.get_spawn_pos()
+
 func _process(delta: float) -> void:
 	var time_left: float = reload_timer.time_left
 	if time_left:
 		hud.set_reload_bar_ratio((reload_timer.wait_time - time_left) / reload_timer.wait_time)
 		
-	
-		
-
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = get_direction()
+	
+	var viewport_rect: Vector2 = get_viewport_rect().size
+	
 	
 	if direction:
 		if is_dashing:
@@ -54,6 +59,12 @@ func _physics_process(delta: float) -> void:
 	if not ghost_timer.is_stopped() and velocity.length() <= speed:
 		remove_from_group("invinceable")
 		ghost_timer.stop()
+		
+	if (global_position.x <= 8 and velocity.x < 0.0) or (global_position.x >= (viewport_rect.x - 8) and velocity.x > 0.0):
+		velocity.x = 0 
+		
+	if (global_position.y <= 16 and velocity.y < 0.0) or (global_position.y >= (viewport_rect.y - 16)  and velocity.y > 0.0):
+		velocity.y = 0
 		
 	move_and_slide()
 
@@ -134,3 +145,11 @@ func _on_dialogue_cast_body_exited(body: Node2D) -> void:
 	if body.is_in_group("talkable"):
 		hud.talk_disable()
 		talkable_char = null
+
+
+func _on_hit() -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(character_sprite, "modulate", Color.RED, 0.1)
+	tween.tween_property(character_sprite, "modulate", Color.WHITE, 0.1)
+	
+	PlayerManager.player_hit.emit()

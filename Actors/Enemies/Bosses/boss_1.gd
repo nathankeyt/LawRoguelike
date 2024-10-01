@@ -13,6 +13,9 @@ var shoot_aerial: bool = false
 
 func _process(delta: float) -> void:
 	animation_tree.set("parameters/WalkCycle/blend_position", velocity.length())
+	
+func attack():
+	$ShootTimer.start()
 
 func _on_shoot_timer_timeout() -> void:
 	if shoot_aerial:

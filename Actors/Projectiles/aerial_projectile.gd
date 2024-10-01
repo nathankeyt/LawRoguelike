@@ -43,6 +43,8 @@ func _on_body_entered(body: Node2D) -> void:
 		handle_collision(body)
 			
 func handle_collision(body: Node2D) -> void:
+	body.emit_signal("hit")
+	
 	var hit_effect: GPUParticles2D = hit_effect.instantiate()
 	get_parent().get_parent().add_child(hit_effect)
 	hit_effect.position = global_position
