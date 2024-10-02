@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_o00jw"]
 [ext_resource type="PackedScene" uid="uid://cjqulh0glkpxm" path="res://Actors/Enemies/basic_enemy.tscn" id="3_sp5ik"]
 [ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="4_7g8jk"]
-[ext_resource type="PackedScene" uid="uid://7nusbt4flwao" path="res://boss_facade.tscn" id="5_717i2"]
-[ext_resource type="Script" path="res://mallet_spawner.gd" id="5_tcagk"]
-[ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://scene_loader.tscn" id="7_2ei0o"]
+[ext_resource type="PackedScene" uid="uid://7nusbt4flwao" path="res://Actors/Enemies/boss_facade.tscn" id="5_717i2"]
+[ext_resource type="Script" path="res://Actors/mallet_spawner.gd" id="5_tcagk"]
+[ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://Levels/scene_loader.tscn" id="7_2ei0o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxq5h"]
 texture = ExtResource("1_o00jw")

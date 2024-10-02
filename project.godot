@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="LegalRoguelike"
-run/main_scene="res://start_level.tscn"
+run/main_scene="res://Actors/start_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerManager="*res://player_manager.gd"
+PlayerManager="*res://Actors/player_manager.gd"
 
 [display]
 

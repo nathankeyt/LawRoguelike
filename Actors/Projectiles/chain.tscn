@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://j6qif8sxhbn6"]
 
-[ext_resource type="PackedScene" uid="uid://ci10si41n6f57" path="res://chain_head.tscn" id="1_nyv7b"]
-[ext_resource type="PackedScene" uid="uid://br3db1klup534" path="res://chain_link.tscn" id="1_vyoxs"]
-[ext_resource type="PackedScene" uid="uid://b5fp013mx5nda" path="res://chain_joint.tscn" id="2_copb7"]
+[ext_resource type="PackedScene" uid="uid://ci10si41n6f57" path="res://Actors/Projectiles/chain_head.tscn" id="1_nyv7b"]
+[ext_resource type="PackedScene" uid="uid://br3db1klup534" path="res://Actors/Projectiles/chain_link.tscn" id="1_vyoxs"]
+[ext_resource type="PackedScene" uid="uid://b5fp013mx5nda" path="res://Actors/Projectiles/chain_joint.tscn" id="2_copb7"]
 
 [node name="Chain" type="Node2D"]
 

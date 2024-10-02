@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Actors/Projectiles/chain.gd" id="1_mkmcl"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="2_6jycg"]
-[ext_resource type="PackedScene" uid="uid://j6qif8sxhbn6" path="res://chain.tscn" id="2_ivoyy"]
+[ext_resource type="PackedScene" uid="uid://j6qif8sxhbn6" path="res://Actors/Projectiles/chain.tscn" id="2_ivoyy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6rwhm"]
 radius = 8.06226

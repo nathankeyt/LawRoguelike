@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Actors/Enemies/basic_enemy.gd" id="1_xvub2"]
 [ext_resource type="Texture2D" uid="uid://cffo6akcmcehr" path="res://Sprites/Enemies/mallet.png" id="2_2qfd8"]
 [ext_resource type="Script" path="res://Actors/Enemies/charging.gd" id="4_diewp"]
-[ext_resource type="Script" path="res://chasing_mallet.gd" id="4_fx8j7"]
+[ext_resource type="Script" path="res://Actors/Enemies/States/chasing_mallet.gd" id="4_fx8j7"]
 [ext_resource type="Script" path="res://Actors/Enemies/startup.gd" id="4_xvv8p"]
 [ext_resource type="Script" path="res://Actors/Enemies/flying.gd" id="5_401w4"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="6_rhmf6"]
