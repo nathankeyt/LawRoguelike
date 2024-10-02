@@ -1,20 +1,25 @@
 extends Node2D
 
-@export var text: String = ""
 @export var char_name: String = ""
 @export var name_label: RichTextLabel
 @export var dialogue_label: RichTextLabel
 @export var confirm_label: RichTextLabel
 @export var low_pitch: float = 1.0
 @export var high_pitch: float = 1.0
+@export var text_arr: PackedStringArray
+@export var player: CharacterBody2D
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var dialogue_timer: Timer = $DialogueTimer
 @onready var blink_timer: Timer = $BlinkTimer
 
+var text: String = ""
+var text_index: int = 0
 var dialogue_index: int = 0;
 
+
 func _ready() -> void:
+	reset()
 	name_label.text = char_name
 	
 func set_audio(new_audio: AudioStream) -> void:
@@ -27,6 +32,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("confirm"):
 		if dialogue_timer.is_stopped():
 			reset()
+			play()
 		else:
 			early_press()
 
@@ -42,7 +48,14 @@ func early_press() -> void:
 	pause()
 
 func reset() -> void:
+	if text_index >= text_arr.size():
+		player.end_talk()
+		return
+	
 	dialogue_label.text = ""
+	text = text_arr[text_index]
+	text_index += 1
+	dialogue_index = 0
 	stop_confirm()
 	
 func start_confirm() -> void:

@@ -86,11 +86,14 @@ func talk() -> void:
 		return
 		
 	dialogue_node.show()
-	dialogue_node.set_text("Wowza, haven't had visitors here in a while!")
 	dialogue_node.play()
 	hud.hide()
 	map.hide()
-	
+
+func end_talk() -> void:
+	dialogue_node.hide()
+	hud.show()
+	map.show()
 		
 func parry() -> void:
 	var shield = shield_scene.instantiate()

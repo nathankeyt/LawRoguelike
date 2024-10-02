@@ -81,9 +81,6 @@ curve = SubResource("Curve2D_se1d7")
 position = Vector2(285, 155)
 rotates = false
 
-[node name="Dialogue" parent="." instance=ExtResource("4_7g8jk")]
-visible = false
-
 [node name="SceneLoader" parent="." instance=ExtResource("7_2ei0o")]
 position = Vector2(288, -12)
 scale = Vector2(100, 50)
@@ -93,5 +90,9 @@ scene = "res://hallway.tscn"
 position = Vector2(-18, 191)
 scale = Vector2(50, 100)
 scene = "res://start_level.tscn"
+
+[node name="Dialogue" parent="." instance=ExtResource("4_7g8jk")]
+visible = false
+text_arr = PackedStringArray("Wowza", "My name\'s Spike")
 
 [connection signal="timeout" from="Map/Path2D/MalletSpawner/SpawnRate" to="Map/Path2D/MalletSpawner" method="_on_spawn_rate_timeout"]

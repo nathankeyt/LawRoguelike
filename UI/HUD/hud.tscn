@@ -17,6 +17,7 @@ script = ExtResource("1_0xitq")
 spirit_bar = NodePath("MarginContainer/VBoxContainer/HBoxContainer/SpiritBar")
 reload_bar = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ReloadBar")
 talk_tip_label = NodePath("MarginContainer/RichTextLabel")
+talk_tip_text = "[center]Press [%s] to talk[/center]"
 health_bar = NodePath("MarginContainer/VBoxContainer/HealthBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
