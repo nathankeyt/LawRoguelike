@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var parry_sound: AudioStream;
+
 @onready var parry_timer: Timer = $ParryTimer
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -22,6 +24,7 @@ func _on_parry_timer_timeout() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("parryable"):
+		GlobalAudioManager.play_SFX(parry_sound)
 		if "target" in area:
 			area.target.queue_free()
 		area.velocity = area.velocity.bounce(Vector2.from_angle(rotation)) * parry_speedup

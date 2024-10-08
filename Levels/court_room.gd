@@ -77,6 +77,8 @@ func _on_survival_timer_timeout() -> void:
 func _on_boss_1_phase_end() -> void:
 	if active_dialogue == last_dialogue_node:
 		$Map/Path2D/MalletSpawner.stop()
+		boss.stop()
+		GlobalAudioManager.stop()
 		await get_tree().create_timer(1.0).timeout
 		boss.rotate(-PI/2)
 		await get_tree().create_timer(1.0).timeout
