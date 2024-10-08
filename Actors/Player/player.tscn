@@ -417,6 +417,8 @@ walk_sounds = Array[AudioStream]([ExtResource("5_n0hge"), ExtResource("6_adw0f")
 dash_sound = ExtResource("8_4iici")
 hit_audio = ExtResource("9_86m8t")
 
+[node name="ReferencePoint" type="Node2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_obdyc")
@@ -479,8 +481,6 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueCast"]
 shape = SubResource("CircleShape2D_5b0h5")
-
-[node name="Node" type="Node" parent="." groups=["chaseable"]]
 
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 0.2

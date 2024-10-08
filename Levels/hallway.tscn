@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bavo0xnviimak"]
+[gd_scene load_steps=7 format=4 uid="uid://bavo0xnviimak"]
 
 [ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_evjho"]
 [ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="2_gim0y"]
 [ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://Levels/scene_loader.tscn" id="3_vu5oo"]
+[ext_resource type="FontFile" uid="uid://bfqvw5m45spwp" path="res://Sprites/UI/Retro Gaming.ttf" id="4_8n5m1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pe1p"]
 texture = ExtResource("1_evjho")
@@ -51,3 +52,21 @@ scene = "res://Levels/main.tscn"
 position = Vector2(290, -7)
 scale = Vector2(100, 50)
 scene = "res://Levels/court_room.tscn"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 330.0
+offset_top = 126.0
+offset_right = 559.0
+offset_bottom = 177.0
+theme_override_fonts/normal_font = ExtResource("4_8n5m1")
+bbcode_enabled = true
+text = "[center][color=FFA500]Orange [/color]can be deflected.[/center]"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 22.0
+offset_top = 126.0
+offset_right = 251.0
+offset_bottom = 181.0
+theme_override_fonts/normal_font = ExtResource("4_8n5m1")
+bbcode_enabled = true
+text = "[center]Press [SPACE] to deflect.[/center]"

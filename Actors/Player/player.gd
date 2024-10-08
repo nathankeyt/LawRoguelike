@@ -114,10 +114,11 @@ func end_talk() -> void:
 	map.show()
 		
 func parry() -> void:
-	var shield = shield_scene.instantiate()
+	var shield : Node2D = shield_scene.instantiate()
 	add_child(shield)
 	shield.position += (get_global_mouse_position() - position).normalized() * 20.0
-	shield.look_at(get_global_mouse_position())
+	$ReferencePoint.look_at(get_global_mouse_position())
+	shield.rotation = $ReferencePoint.rotation
 	shield.setup(parry_length, parry_speedup)
 		
 func get_direction() -> Vector2:
@@ -198,6 +199,7 @@ func _on_hit() -> void:
 		rotate(-PI/2)
 		await get_tree().create_timer(1.0).timeout
 		get_tree().change_scene_to_file.call_deferred("res://Levels/game_over.tscn")
+		return
 
 
 func _on_post_i_frame_time_timeout() -> void:

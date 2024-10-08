@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=10 format=4 uid="uid://by20dpmm3ognl"]
 
 [ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_3spen"]
 [ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="2_pb58o"]
 [ext_resource type="PackedScene" uid="uid://7nusbt4flwao" path="res://Actors/Enemies/Bosses/boss_facade.tscn" id="5_6r8yl"]
 [ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://Levels/scene_loader.tscn" id="6_dh4kb"]
+[ext_resource type="FontFile" uid="uid://bfqvw5m45spwp" path="res://Sprites/UI/Retro Gaming.ttf" id="6_ms55y"]
 [ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="7_hxcpw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxq5h"]
@@ -74,3 +75,13 @@ scene = "res://Levels/start_level.tscn"
 [node name="Dialogue" parent="." instance=ExtResource("7_hxcpw")]
 visible = false
 text_arr = PackedStringArray("Wowza", "My name\'s Spike")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 167.0
+offset_top = 238.0
+offset_right = 404.0
+offset_bottom = 329.0
+theme_override_fonts/normal_font = ExtResource("6_ms55y")
+bbcode_enabled = true
+text = "[center]Press [SHIFT] to dash.
+Grants you brief [color=00BFFF]invulnerability.[/color][center]"

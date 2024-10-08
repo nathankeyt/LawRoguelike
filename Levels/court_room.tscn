@@ -53,7 +53,7 @@ size = Vector2(64, 5.25)
 
 [sub_resource type="Curve2D" id="Curve2D_vwodi"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 25, 117, 0, 0, 0, 0, 19, 238, 0, 0, 0, 0, 151, 301, 0, 0, 0, 0, 480, 302, 0, 0, 0, 0, 481, 239, 0, 0, 0, 0, 559, 239, 0, 0, 0, 0, 555, 117, 0, 0, 0, 0, 472, 114, 0, 0, 0, 0, 451, 29, 0, 0, 0, 0, 397, 27, 0, 0, 0, 0, 390, 134, 0, 0, 0, 0, 180, 132, 0, 0, 0, 0, 155, 30, 0, 0, 0, 0, 113, 33, 0, 0, 0, 0, 105, 112, 0, 0, 0, 0, 24, 116)
+"points": PackedVector2Array(0, 0, 0, 0, 25, 117, 0, 0, 0, 0, 20, 300, 0, 0, 0, 0, 151, 301, 0, 0, 0, 0, 480, 302, 0, 0, 0, 0, 559, 301, 0, 0, 0, 0, 559, 239, 0, 0, 0, 0, 555, 117, 0, 0, 0, 0, 459, 113, 0, 0, 0, 0, 451, 29, 0, 0, 0, 0, 397, 27, 0, 0, 0, 0, 399, 144, 0, 0, 0, 0, 177, 142, 0, 0, 0, 0, 166, 30, 0, 0, 0, 0, 113, 33, 0, 0, 0, 0, 114, 116, 0, 0, 0, 0, 24, 116)
 }
 point_count = 16
 
@@ -196,7 +196,7 @@ curve = SubResource("Curve2D_vwodi")
 
 [node name="MalletSpawner" type="PathFollow2D" parent="Map/Path2D" node_paths=PackedStringArray("target")]
 position = Vector2(25, 117)
-rotation = 1.62034
+rotation = 1.59811
 script = ExtResource("7_4uldi")
 mallet_scene = ExtResource("8_pkktx")
 target = NodePath("../../Player")

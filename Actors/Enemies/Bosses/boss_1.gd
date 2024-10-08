@@ -43,16 +43,20 @@ func _on_shoot_timer_timeout() -> void:
 			projectile_launcher.fire_projectile(shoot_projectile_scene, player.position, projectile_speed, 40.0, self)
 		else:
 			GlobalAudioManager.play_SFX(normal_attack)
-			projectile_launcher.fire_projectile(shoot_projectile_scene2, player.position, projectile_speed, 50.0, self)
+			projectile_launcher.fire_projectile(shoot_projectile_scene2, player.position, projectile_speed, 40.0, self)
 	shoot_chain = !shoot_chain
 
 func reset():
 	health = 3
+	health_bar.hide()
 	health_bar.value = 3
+	stop()
+	
 	
 func stop():
+	$ShootTimer.stop()
 	is_aggro = false
-	current_state = $States/Idle
+	current_state.change_state.emit($States/Idle)
 
 func _on_boss_hit() -> void:
 	health -= 1

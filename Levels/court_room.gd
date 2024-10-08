@@ -57,7 +57,6 @@ func end_talk() -> void:
 	elif active_dialogue == mid_dialogue_node:
 		boss.attack()
 	else:
-		boss.reset()
 		boss.attack()
 		$Map/Path2D/MalletSpawner.start()
 
@@ -76,13 +75,15 @@ func _on_survival_timer_timeout() -> void:
 	talk(mid_dialogue_node)
 	
 func _on_boss_1_phase_end() -> void:
-	boss.stop()
-	
 	if active_dialogue == start_dialogue_node:
 		$Map/Path2D/MalletSpawner.stop()
 		await get_tree().create_timer(1.0).timeout
 		boss.rotate(-PI/2)
+		await get_tree().create_timer(1.0).timeout
+		get_tree().change_scene_to_file.call_deferred("res://Levels/win.tscn")
 		return
 	
+	boss.reset()
 	boss.global_position = $Map/BossPos.global_position
+	await get_tree().create_timer(1.0).timeout
 	talk(last_dialogue_node)
