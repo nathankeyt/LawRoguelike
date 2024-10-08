@@ -2,12 +2,17 @@ extends Node
 
 var health: int = 3
 var last_pos: Vector2;
+var viewport_rect: Rect2;
+
 
 signal player_hit
 
+func set_viewport_rect(rect: Rect2):
+	viewport_rect = rect
+	last_pos = viewport_rect.get_center()
+
 func reset() -> void:
 	health = 3
-	last_pos = get_viewport().get_final_transform().get_origin()
 
 func _ready() -> void:
 	reset()
@@ -22,7 +27,7 @@ func store_last_pos(pos: Vector2):
 	last_pos = pos
 
 func get_spawn_pos() -> Vector2:
-	var center: Vector2 = get_viewport().get_final_transform().get_origin()
+	var center: Vector2 = viewport_rect.get_center()
 	var forward: Vector2 = (center - last_pos)
 	
 	if abs(forward.x) < abs(forward.y):
