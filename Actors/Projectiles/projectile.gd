@@ -4,7 +4,7 @@ extends Area2D
 
 var velocity: Vector2 = Vector2(0, 0)
 
-func fire(forward: Vector2, speed: float) -> void:
+func fire(forward: Vector2, speed: float, parent: Node2D) -> void:
 	velocity = forward * speed;
 	look_at(position + forward);
 
@@ -21,6 +21,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 		
 	body.emit_signal("hit")
+	body.emit_signal("boss_hit")
 
 	var hit_effect: GPUParticles2D = hit_effect.instantiate()
 	get_parent().add_child(hit_effect)

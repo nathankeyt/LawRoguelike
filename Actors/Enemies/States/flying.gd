@@ -3,6 +3,8 @@ extends State
 @export var fly_speed: float = 500.0
 @export var hit_effect: Resource;
 
+@export var flying_sound: AudioStream
+
 
 var collision_shape: CollisionShape2D;
 
@@ -16,6 +18,7 @@ func process_state(delta: float):
 	
 	
 func on_enter_state():
+	GlobalAudioManager.play_SFX(flying_sound);
 	target = body.target
 	var distance: Vector2 = target.position - body.position
 	body.velocity = distance.normalized() * fly_speed

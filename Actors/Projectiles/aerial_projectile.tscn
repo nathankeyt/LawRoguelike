@@ -1,20 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://djsjg3qddd0ks"]
+[gd_scene load_steps=7 format=3 uid="uid://djsjg3qddd0ks"]
 
 [ext_resource type="Script" path="res://Actors/Projectiles/aerial_projectile.gd" id="1_4rp0l"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="2_0v8rh"]
-[ext_resource type="Texture2D" uid="uid://cs0gowgpigk7j" path="res://Sprites/spin_attack.png" id="3_mjp1w"]
+[ext_resource type="Texture2D" uid="uid://cbiwp3gudpx3d" path="res://Sprites/spike.png" id="3_hj1t2"]
+[ext_resource type="AudioStream" uid="uid://b68aq3oykroef" path="res://Sound/Minifantasy_Dungeon_SFX/20_orc_special_atk.wav" id="3_j67ur"]
+[ext_resource type="AudioStream" uid="uid://bmky6lnfllpjr" path="res://Sound/Minifantasy_Dungeon_SFX/13_human_jump_land_2.wav" id="4_gr0e7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vwoc"]
 size = Vector2(29, 20)
 
 [node name="AerialProjectile" type="Area2D"]
+collision_layer = 0
+collision_mask = 15
 script = ExtResource("1_4rp0l")
 hit_effect = ExtResource("2_0v8rh")
 rotation_rate = 5.0
+hit_sound = ExtResource("3_j67ur")
+miss_sound = ExtResource("4_gr0e7")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.293745, 0.231067, 1)
-texture = ExtResource("3_mjp1w")
+rotation = -1.5708
+texture = ExtResource("3_hj1t2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4.5, 0)

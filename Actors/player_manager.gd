@@ -5,16 +5,18 @@ var last_pos: Vector2;
 
 signal player_hit
 
-func _ready() -> void:
+func reset() -> void:
+	health = 3
 	last_pos = get_viewport().get_final_transform().get_origin()
+
+func _ready() -> void:
+	reset()
 	PlayerManager.player_hit.connect(_on_player_hit)
 
 func _on_player_hit() -> void:
 	print("hit")
 	health -= 1;
-	
-	if health < 1:
-		get_tree().reload_current_scene()
+		
 		
 func store_last_pos(pos: Vector2):
 	last_pos = pos

@@ -1,5 +1,7 @@
 extends AudioStreamPlayer2D
 
+signal sfx_finished
+
 func play_track(new_stream: AudioStream, volume = 1.0):
 	if (stream == new_stream):
 		return
@@ -8,7 +10,7 @@ func play_track(new_stream: AudioStream, volume = 1.0):
 	volume_db = volume
 	play()
 	
-func play_SFX(new_stream: AudioStream, volume = 1.0):
+func play_SFX(new_stream: AudioStream, volume = 1.0, length = 0.0):
 	var sfx_player = AudioStreamPlayer2D.new()
 	sfx_player.stream = new_stream
 	sfx_player.volume_db = volume
@@ -16,5 +18,11 @@ func play_SFX(new_stream: AudioStream, volume = 1.0):
 	add_child(sfx_player)
 	sfx_player.play()
 	
-	await sfx_player.finished
-	queue_free()
+	if length:
+		await get_tree().create_timer(length).timeout
+		sfx_finished.emit()
+		sfx_player.queue_free()
+	else:
+		await sfx_player.finished
+		sfx_finished.emit()
+		sfx_player.queue_free()

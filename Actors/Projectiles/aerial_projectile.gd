@@ -3,6 +3,10 @@ extends Area2D
 @export var hit_effect: Resource
 @export var target: Area2D
 @export var rotation_rate: float = 10.0
+@export var hit_sound: AudioStream
+@export var miss_sound: AudioStream
+
+var curr_wiggle: float = 0.0
 
 @onready var sprite: Sprite2D = $MainSprite
 
@@ -13,10 +17,15 @@ func fire_at_target(speed: float) -> void:
 	fire(forward, speed)
 
 func fire(forward: Vector2, speed: float) -> void:
+	#var tween: Tween = create_tween().set_loops()
+	#tween.tween_property(sprite, "position:x", 10.0, 0.5)
+	#tween.tween_property(sprite, "position:x", -10.0, 0.5)
+	
 	scale_target()
 	get_parent().show()
 	velocity = forward * speed
 	look_at(position + forward)
+	
 	
 func _process(delta: float) -> void:
 	scale_target()
@@ -24,12 +33,13 @@ func _process(delta: float) -> void:
 func scale_target() -> void:
 	if is_instance_valid(target):
 		var distance: float = (target.position - position).length() / 100.0
-		target.get_node("Sprite2D").scale = Vector2(distance, distance)
+		target.get_node("Sprite2D").scale = Vector2(distance + 0.1, (distance + 0.1) / 2.0)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
-	sprite.rotation += rotation_rate
+		
+	#sprite.rotation += rotation_rate
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("invinceable"):
@@ -51,11 +61,14 @@ func handle_collision(body: Node2D) -> void:
 	hit_effect.emitting = true
 	#hit_effect.look_at(position - Vector2.from_angle(rotation))
 	hit_effect.look_at(global_position+ (global_position - body.position).normalized())
-
+	
+	GlobalAudioManager.play_SFX(hit_sound)
+	
 	get_parent().queue_free()	
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("aerial_target"):
+		GlobalAudioManager.play_SFX(miss_sound)
 		get_parent().queue_free()
 
 

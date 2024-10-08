@@ -4,11 +4,15 @@ extends CharacterBody2D
 @export var dash_speed: float = 300.0
 @export var default_projectile_scene: Resource
 @export var spirit_projectile_scene: Resource
-@export var shield_scene: Resource;
-@export var parry_length: float = 0.25;
-@export var parry_speedup: float = 1.5;
-@export var dialogue_node: Node2D;
-@export var map: Node2D;
+@export var shield_scene: Resource
+@export var parry_length: float = 0.25
+@export var parry_speedup: float = 1.5
+@export var dialogue_node: Node2D
+@export var map: Node2D
+@export var walk_sounds: Array[AudioStream]
+@export var dash_sound: AudioStream
+@export var hit_audio: AudioStream
+@export var game_over: AudioStream
 
 @onready var hud: Control = $CanvasLayer/HUD
 
@@ -20,6 +24,7 @@ extends CharacterBody2D
 @onready var dash_reset_timer: Timer = $DashResetTimer
 
 @onready var character_sprite: Sprite2D = $Sprite2D
+@onready var walk_timer: Timer = $WalkTimer
 
 var last_direction: Vector2 = Vector2.DOWN
 var spirit_power: int = 3;
@@ -49,13 +54,18 @@ func _physics_process(delta: float) -> void:
 	if canAct:
 		if direction:
 			if is_dashing:
+				walk_timer.stop()
 				velocity = direction * velocity.length()
 			else:
+				if walk_timer.is_stopped():
+					walk_timer.start()
 				velocity = velocity.move_toward(direction * speed, speed)
 				
 			animation_tree.set("parameters/WalkCycle/blend_position", direction)
 			last_direction = direction;
 		elif not is_dashing:
+			walk_timer.stop()
+				
 			animation_tree.set("parameters/WalkCycle/blend_position", last_direction * 0.5);
 			velocity = velocity.move_toward(Vector2.ZERO, speed)
 		
@@ -71,6 +81,8 @@ func _physics_process(delta: float) -> void:
 	
 	if canAct:
 		move_and_slide()
+	else:
+		walk_timer.stop()
 
 func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("alt_fire"):
@@ -122,6 +134,8 @@ func dash() -> void:
 	var direction: Vector2 = get_direction()
 	
 	if direction and can_dash:
+		$FootstepPlayer.stream = dash_sound
+		$FootstepPlayer.play()
 		velocity = direction * dash_speed
 		is_dashing = true;
 		can_dash = false;
@@ -153,12 +167,15 @@ func _on_dash_reset_timer_timeout() -> void:
 
 
 func _on_dialogue_cast_body_entered(body: Node2D) -> void:
+	return 
+	
 	if body.is_in_group("talkable"):
 		hud.talk_enable()
 		talkable_char = body
 
 
 func _on_dialogue_cast_body_exited(body: Node2D) -> void:
+	return
 	if body.is_in_group("talkable"):
 		hud.talk_disable()
 		talkable_char = null
@@ -169,9 +186,25 @@ func _on_hit() -> void:
 	tween.tween_property(character_sprite, "modulate", Color.RED, 0.1)
 	tween.tween_property(character_sprite, "modulate", Color.WHITE, 0.1)
 	
+	GlobalAudioManager.play_SFX(hit_audio)
 	PlayerManager.player_hit.emit()
+	
+	if PlayerManager.health <= 0:
+		GlobalAudioManager.play_SFX(game_over);
+		GlobalAudioManager.stop()
+		canAct = false
+		animation_tree.set("parameters/WalkCycle/blend_position", Vector2(0.0, 0.5))
+		await get_tree().create_timer(1.0).timeout
+		rotate(-PI/2)
+		await get_tree().create_timer(1.0).timeout
+		get_tree().change_scene_to_file.call_deferred("res://Levels/game_over.tscn")
 
 
 func _on_post_i_frame_time_timeout() -> void:
 	collision_layer = enable_bit(collision_layer, 1)
 	remove_from_group("invinceable")
+
+
+func _on_walk_timer_timeout() -> void:
+	$FootstepPlayer.stream = walk_sounds.pick_random()
+	$FootstepPlayer.play()

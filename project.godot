@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="LegalRoguelike"
-run/main_scene="res://Levels/start_level.tscn"
+run/main_scene="res://Levels/start_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 PlayerManager="*res://Actors/player_manager.gd"
-GlobalAudioManager="*res://global_audio_manager.gd"
-EnemyManager="*res://enemy_manager.gd"
+GlobalAudioManager="*res://Components/global_audio_manager.gd"
+EnemyManager="*res://Components/enemy_manager.gd"
 
 [display]
 
@@ -43,6 +43,7 @@ aerial_target=""
 chaseable=""
 targetable=""
 player=""
+enemy=""
 
 [input]
 

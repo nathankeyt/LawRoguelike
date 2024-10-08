@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjqulh0glkpxm"]
+[gd_scene load_steps=17 format=3 uid="uid://cjqulh0glkpxm"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/basic_enemy.gd" id="1_xvub2"]
 [ext_resource type="Texture2D" uid="uid://cffo6akcmcehr" path="res://Sprites/Enemies/mallet.png" id="2_2qfd8"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://Actors/Enemies/States/chasing_mallet.gd" id="4_fx8j7"]
 [ext_resource type="Script" path="res://Actors/Enemies/startup.gd" id="4_xvv8p"]
 [ext_resource type="Script" path="res://Actors/Enemies/States/flying.gd" id="5_401w4"]
+[ext_resource type="AudioStream" uid="uid://d2y8sdefgicol" path="res://Sound/Minifantasy_Dungeon_SFX/19_orc_charging_loop.wav" id="6_kno3c"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="6_rhmf6"]
+[ext_resource type="AudioStream" uid="uid://bxdn7u8n26wfk" path="res://Sound/Minifantasy_Dungeon_SFX/27_sword_miss_1.wav" id="9_md31t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yy7"]
 size = Vector2(26, 28)
@@ -148,10 +150,12 @@ script = ExtResource("4_xvv8p")
 
 [node name="Charging" type="Node" parent="States"]
 script = ExtResource("4_diewp")
+charge_sound = ExtResource("6_kno3c")
 
 [node name="Flying" type="Node" parent="States"]
 script = ExtResource("5_401w4")
 hit_effect = ExtResource("6_rhmf6")
+flying_sound = ExtResource("9_md31t")
 
 [node name="HitRange" type="Area2D" parent="."]
 collision_layer = 0

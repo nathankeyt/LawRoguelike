@@ -2,10 +2,13 @@ extends Area2D
 
 @export var hit_effect: Resource
 @export var active_time: float = 3.0
+@export var hit_sound: AudioStream
 
 @onready var lifespan: Timer = $TimeToLive
 @onready var chain_end: AnimatableBody2D = $Chain.get_node("ChainEnd")
 
+
+var curr_parent: Node2D
 var chain_range: float
 var chain_target: Node2D
 
@@ -14,7 +17,8 @@ var velocity: Vector2 = Vector2(0, 0)
 func _ready() -> void:
 	chain_range = chain_end.position.length()
 
-func fire(forward: Vector2, speed: float) -> void:	
+func fire(forward: Vector2, speed: float, parent: Node2D) -> void:	
+	curr_parent = parent
 	velocity = forward * speed
 	look_at(position + forward)
 
@@ -37,6 +41,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 		
 	if body.is_in_group("targetable"):
+		curr_parent.shoot_aerial = true
+		GlobalAudioManager.play_SFX(hit_sound)
 		lifespan	.stop()
 		lifespan.wait_time = active_time
 		lifespan.start()

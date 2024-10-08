@@ -1,17 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcdk3hewkrvu2"]
+[gd_scene load_steps=6 format=3 uid="uid://bcdk3hewkrvu2"]
 
 [ext_resource type="Script" path="res://Actors/Projectiles/chain.gd" id="1_mkmcl"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="2_6jycg"]
 [ext_resource type="PackedScene" uid="uid://j6qif8sxhbn6" path="res://Actors/Projectiles/chain.tscn" id="2_ivoyy"]
+[ext_resource type="AudioStream" uid="uid://f8skq0kgfv2i" path="res://Sound/Minifantasy_Dungeon_SFX/10_human_special_atk_1.wav" id="3_oq77t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6rwhm"]
 radius = 8.06226
 
 [node name="ChainProjectile" type="Area2D" groups=["parryable"]]
 scale = Vector2(1, 1.00871)
+collision_layer = 0
+collision_mask = 15
 script = ExtResource("1_mkmcl")
 hit_effect = ExtResource("2_6jycg")
 active_time = 5.0
+hit_sound = ExtResource("3_oq77t")
 
 [node name="Chain" parent="." instance=ExtResource("2_ivoyy")]
 scale = Vector2(1.00449, 1)

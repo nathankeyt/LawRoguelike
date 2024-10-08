@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkosse7psagdc"
+path="res://.godot/imported/Three Red Hearts - Rabbit Town.ogg-4d580ba7afb42861f7a0056b6c61df3c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Music/Three Red Hearts - Rabbit Town.ogg"
+dest_files=["res://.godot/imported/Three Red Hearts - Rabbit Town.ogg-4d580ba7afb42861f7a0056b6c61df3c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

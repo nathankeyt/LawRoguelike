@@ -31,6 +31,10 @@ func set_text(new_text: String) -> void:
 func _input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("confirm"):
 		if dialogue_timer.is_stopped():
+			if text_index >= text_arr.size():
+				controller.end_talk()
+				text_index = 0
+				return
 			reset()
 			play()
 		else:
@@ -48,11 +52,6 @@ func early_press() -> void:
 	pause()
 
 func reset() -> void:
-	if text_index >= text_arr.size():
-		controller.end_talk()
-		text_index = 0
-		return
-	
 	dialogue_label.text = ""
 	text = text_arr[text_index]
 	text_index += 1

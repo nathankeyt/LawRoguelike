@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7nlp8a3b8qdb"
+path="res://.godot/imported/Three Red Hearts - Save the City.ogg-5062dea50a8d3c0ea6eecac77250ee2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Music/Three Red Hearts - Save the City.ogg"
+dest_files=["res://.godot/imported/Three Red Hearts - Save the City.ogg-5062dea50a8d3c0ea6eecac77250ee2d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
