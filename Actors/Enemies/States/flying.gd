@@ -26,6 +26,7 @@ func on_enter_state():
 
 
 func _on_hit_range_body_entered(other: Node2D) -> void:
+	print(other)
 	if other.is_in_group("invinceable"):
 		return
 		

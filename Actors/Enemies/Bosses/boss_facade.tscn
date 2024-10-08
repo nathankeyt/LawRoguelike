@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://7nusbt4flwao"]
 
-[ext_resource type="Script" path="res://Actors/Enemies/boss_facade.gd" id="1_lsuls"]
+[ext_resource type="Script" path="res://Actors/Enemies/Bosses/boss_facade.gd" id="1_lsuls"]
 [ext_resource type="Texture2D" uid="uid://c8vpd08asu63l" path="res://Sprites/Enemies/Bosses/prosecutor1.png" id="1_wlqjp"]
 
 [sub_resource type="Animation" id="Animation_2snyw"]
@@ -71,5 +71,6 @@ libraries = {
 }
 
 [node name="StartTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

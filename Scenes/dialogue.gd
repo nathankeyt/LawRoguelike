@@ -7,7 +7,7 @@ extends Node2D
 @export var low_pitch: float = 1.0
 @export var high_pitch: float = 1.0
 @export var text_arr: PackedStringArray
-@export var player: CharacterBody2D
+@export var controller: Node2D
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var dialogue_timer: Timer = $DialogueTimer
@@ -29,7 +29,7 @@ func set_text(new_text: String) -> void:
 	text = new_text
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("confirm"):
+	if visible and event.is_action_pressed("confirm"):
 		if dialogue_timer.is_stopped():
 			reset()
 			play()
@@ -49,7 +49,8 @@ func early_press() -> void:
 
 func reset() -> void:
 	if text_index >= text_arr.size():
-		player.end_talk()
+		controller.end_talk()
+		text_index = 0
 		return
 	
 	dialogue_label.text = ""

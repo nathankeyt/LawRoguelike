@@ -45,9 +45,9 @@ map = NodePath("..")
 [node name="SceneLoader2" parent="Map" instance=ExtResource("3_vu5oo")]
 position = Vector2(286, 329)
 scale = Vector2(100, 50)
-scene = "res://main.tscn"
+scene = "res://Levels/main.tscn"
 
 [node name="SceneLoader3" parent="Map" instance=ExtResource("3_vu5oo")]
 position = Vector2(290, -7)
 scale = Vector2(100, 50)
-scene = "res://main.tscn"
+scene = "res://Levels/court_room.tscn"

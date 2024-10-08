@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://Actors/Enemies/basic_enemy.gd" id="1_xvub2"]
 [ext_resource type="Texture2D" uid="uid://cffo6akcmcehr" path="res://Sprites/Enemies/mallet.png" id="2_2qfd8"]
-[ext_resource type="Script" path="res://Actors/Enemies/charging.gd" id="4_diewp"]
+[ext_resource type="Script" path="res://Actors/Enemies/States/charging.gd" id="4_diewp"]
 [ext_resource type="Script" path="res://Actors/Enemies/States/chasing_mallet.gd" id="4_fx8j7"]
 [ext_resource type="Script" path="res://Actors/Enemies/startup.gd" id="4_xvv8p"]
-[ext_resource type="Script" path="res://Actors/Enemies/flying.gd" id="5_401w4"]
+[ext_resource type="Script" path="res://Actors/Enemies/States/flying.gd" id="5_401w4"]
 [ext_resource type="PackedScene" uid="uid://30mt3lbiamm" path="res://Effects/Particles/hit_particles.tscn" id="6_rhmf6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yy7"]
 size = Vector2(26, 28)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v8jpl"]
-radius = 17.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_koo82"]
+size = Vector2(30, 32)
 
 [sub_resource type="Animation" id="Animation_fob20"]
 length = 0.001
@@ -123,7 +123,8 @@ _data = {
 }
 
 [node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
-collision_layer = 2
+collision_layer = 0
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_xvub2")
 initial_state = NodePath("States/Startup")
@@ -153,9 +154,12 @@ script = ExtResource("5_401w4")
 hit_effect = ExtResource("6_rhmf6")
 
 [node name="HitRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitRange"]
-shape = SubResource("CircleShape2D_v8jpl")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_koo82")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

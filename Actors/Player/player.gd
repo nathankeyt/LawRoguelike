@@ -27,6 +27,8 @@ var can_shoot: bool = true;
 var is_dashing: bool = false;
 var can_dash: bool = true;
 var talkable_char: Node2D;
+var canAct: bool = true;
+
 
 signal hit;
 
@@ -44,20 +46,21 @@ func _physics_process(delta: float) -> void:
 	var viewport_rect: Vector2 = get_viewport_rect().size
 	
 	
-	if direction:
-		if is_dashing:
-			velocity = direction * velocity.length()
-		else:
-			velocity = velocity.move_toward(direction * speed, speed)
-			
-		animation_tree.set("parameters/WalkCycle/blend_position", direction)
-		last_direction = direction;
-	elif not is_dashing:
-		animation_tree.set("parameters/WalkCycle/blend_position", last_direction * 0.5);
-		velocity = velocity.move_toward(Vector2.ZERO, speed)
+	if canAct:
+		if direction:
+			if is_dashing:
+				velocity = direction * velocity.length()
+			else:
+				velocity = velocity.move_toward(direction * speed, speed)
+				
+			animation_tree.set("parameters/WalkCycle/blend_position", direction)
+			last_direction = direction;
+		elif not is_dashing:
+			animation_tree.set("parameters/WalkCycle/blend_position", last_direction * 0.5);
+			velocity = velocity.move_toward(Vector2.ZERO, speed)
 		
 	if not ghost_timer.is_stopped() and velocity.length() <= speed:
-		remove_from_group("invinceable")
+		$GhostTimer/PostIFrameTime.start()
 		ghost_timer.stop()
 		
 	if (global_position.x <= 8 and velocity.x < 0.0) or (global_position.x >= (viewport_rect.x - 8) and velocity.x > 0.0):
@@ -65,12 +68,15 @@ func _physics_process(delta: float) -> void:
 		
 	if (global_position.y <= 16 and velocity.y < 0.0) or (global_position.y >= (viewport_rect.y - 16)  and velocity.y > 0.0):
 		velocity.y = 0
-		
-	move_and_slide()
+	
+	if canAct:
+		move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("alt_fire"):
 		#fire_spirit_projectile(spirit_projectile_scene)
+	if not canAct:
+		return
 		
 	if event.is_action_pressed("dash"):
 		dash()
@@ -105,6 +111,13 @@ func parry() -> void:
 func get_direction() -> Vector2:
 	return Input.get_vector("left", "right", "up", "down")
 		
+		
+func enable_bit(mask: int, index: int) -> int:
+	return mask | (1 << index)
+
+func disable_bit(mask: int, index: int) -> int:
+	return mask & ~(1 << index)
+	
 func dash() -> void:
 	var direction: Vector2 = get_direction()
 	
@@ -113,6 +126,7 @@ func dash() -> void:
 		is_dashing = true;
 		can_dash = false;
 		can_shoot = false;
+		collision_layer = disable_bit(collision_layer, 1)
 		add_to_group("invinceable")
 		dash_timer.start()
 		ghost_timer.start_custom()
@@ -156,3 +170,8 @@ func _on_hit() -> void:
 	tween.tween_property(character_sprite, "modulate", Color.WHITE, 0.1)
 	
 	PlayerManager.player_hit.emit()
+
+
+func _on_post_i_frame_time_timeout() -> void:
+	collision_layer = enable_bit(collision_layer, 1)
+	remove_from_group("invinceable")

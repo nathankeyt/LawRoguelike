@@ -1,15 +1,13 @@
-[gd_scene load_steps=12 format=4 uid="uid://by20dpmm3ognl"]
+[gd_scene load_steps=9 format=4 uid="uid://by20dpmm3ognl"]
 
-[ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="1_f7e23"]
-[ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_o00jw"]
-[ext_resource type="PackedScene" uid="uid://cjqulh0glkpxm" path="res://Actors/Enemies/basic_enemy.tscn" id="3_sp5ik"]
-[ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="4_7g8jk"]
-[ext_resource type="PackedScene" uid="uid://7nusbt4flwao" path="res://Actors/Enemies/boss_facade.tscn" id="5_717i2"]
-[ext_resource type="Script" path="res://Actors/mallet_spawner.gd" id="5_tcagk"]
-[ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://Levels/scene_loader.tscn" id="7_2ei0o"]
+[ext_resource type="Texture2D" uid="uid://da76r8xjccfxl" path="res://Sprites/Tilemap/tilemap.png" id="1_3spen"]
+[ext_resource type="PackedScene" uid="uid://cltl538t2rv4j" path="res://Actors/Player/player.tscn" id="2_pb58o"]
+[ext_resource type="PackedScene" uid="uid://7nusbt4flwao" path="res://Actors/Enemies/Bosses/boss_facade.tscn" id="5_6r8yl"]
+[ext_resource type="PackedScene" uid="uid://5x0rhxgp7bx7" path="res://Levels/scene_loader.tscn" id="6_dh4kb"]
+[ext_resource type="PackedScene" uid="uid://ctic3c4lq4as5" path="res://Scenes/dialogue.tscn" id="7_hxcpw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxq5h"]
-texture = ExtResource("1_o00jw")
+texture = ExtResource("1_3spen")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -8.125, -16, -8.125)
@@ -34,15 +32,9 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_gxq5h")
 
-[sub_resource type="Curve2D" id="Curve2D_lba0h"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 25, 117, 0, 0, 0, 0, 19, 232, 0, 0, 0, 0, 151, 301, 0, 0, 0, 0, 480, 302, 0, 0, 0, 0, 481, 239, 0, 0, 0, 0, 559, 239, 0, 0, 0, 0, 555, 117, 0, 0, 0, 0, 367, 115, 0, 0, 0, 0, 369, 114, 0, 0, 0, 0, 365, 22, 0, 0, 0, 0, 216, 23, 0, 0, 0, 0, 216, 112, 0, 0, 0, 0, 24, 116)
-}
-point_count = 13
-
 [sub_resource type="Curve2D" id="Curve2D_se1d7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 285, 155, 0, 0, 0, 0, 284, -52)
+"points": PackedVector2Array(0, 0, 0, 0, 285, 155, 0, 0, 0, 0, 285, -44)
 }
 point_count = 2
 
@@ -54,45 +46,31 @@ point_count = 2
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAMAAAACAAMAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAAAAAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAARAAIAAAAAAAAAAAARAAEAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAEAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAcAAAACAAMAAAAAAAYAAAACAAAAAAAAAAUAAAADAAAAAAAAAAQAAAACAAMAAAAAAAMAAAACAAMAAAABAAMAAAACAAMAAAABAAQAAAACAAMAAAABAAUAAAADAAAAAAABAAYAAAACAAAAAAABAAcAAAACAAMAAAABAAgAAAACAAMAAAAAAAgAAAACAAMAAAAAAAkAAAACAAMAAAABAAkAAAACAAMAAAACAAkAAAACAAMAAAACAAgAAAACAAMAAAACAAcAAAACAAMAAAACAAYAAAACAAAAAAACAAUAAAADAAAAAAACAAQAAAACAAMAAAACAAMAAAACAAMAAAADAAMAAAACAAMAAAADAAQAAAACAAMAAAADAAUAAAADAAAAAAADAAYAAAACAAAAAAADAAcAAAACAAMAAAADAAgAAAACAAMAAAADAAkAAAACAAMAAAAEAAkAAAACAAMAAAAEAAgAAAACAAMAAAAEAAcAAAACAAMAAAAEAAYAAAACAAAAAAAEAAUAAAADAAAAAAAEAAQAAAACAAMAAAAFAAQAAAACAAMAAAAFAAMAAAACAAMAAAAGAAMAAAACAAMAAAAGAAIAAAACAAMAAAAGAAEAAAACAAMAAAAGAAAAAAACAAMAAAAHAAAAAAACAAMAAAAHAAEAAAACAAMAAAAHAAIAAAACAAMAAAAHAAMAAAACAAMAAAAHAAQAAAACAAIAAAAGAAQAAAACAAMAAAAGAAUAAAADAAAAAAAFAAUAAAADAAAAAAAFAAYAAAACAAAAAAAFAAcAAAACAAMAAAAFAAgAAAACAAMAAAAFAAkAAAACAAMAAAAGAAkAAAACAAMAAAAGAAgAAAACAAMAAAAGAAcAAAACAAMAAAAGAAYAAAACAAAAAAAHAAYAAAADAAEAAAAHAAUAAAACAAEAAAAIAAUAAAACAAMAAAAIAAQAAAACAAEAAAAIAAMAAAABAAEAAAAIAAIAAAABAAEAAAAIAAEAAAABAAEAAAAIAAAAAAABAAEAAAAJAAAAAAAAAAEAAAAJAAEAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAJAAQAAAAAAAIAAAAJAAUAAAACAAMAAAAJAAYAAAACAAMAAAAIAAYAAAACAAMAAAAHAAcAAAADAAIAAAAHAAgAAAACAAMAAAAHAAkAAAACAAMAAAAIAAkAAAABAAEAAAAIAAgAAAABAAEAAAAJAAgAAAAAAAEAAAAKAAcAAAABAAMAAAAKAAYAAAABAAIAAAAKAAUAAAAAAAIAAAAKAAQAAAAAAAMAAAAKAAMAAAACAAMAAAAKAAIAAAACAAMAAAAKAAEAAAACAAMAAAAKAAAAAAACAAMAAAALAAAAAAACAAMAAAALAAEAAAACAAMAAAALAAIAAAACAAMAAAALAAMAAAACAAMAAAALAAQAAAACAAMAAAALAAUAAAADAAAAAAALAAYAAAACAAAAAAALAAcAAAACAAMAAAALAAgAAAACAAMAAAAKAAgAAAACAAMAAAAKAAkAAAACAAMAAAAJAAkAAAAAAAEAAAALAAkAAAACAAMAAAAMAAkAAAACAAMAAAAMAAgAAAACAAMAAAAMAAcAAAACAAMAAAAMAAYAAAACAAAAAAAMAAUAAAADAAAAAAAMAAQAAAACAAMAAAAMAAMAAAACAAMAAAANAAMAAAACAAMAAAANAAQAAAACAAMAAAANAAUAAAADAAAAAAANAAYAAAACAAAAAAANAAcAAAACAAMAAAANAAgAAAACAAMAAAANAAkAAAACAAMAAAAOAAkAAAACAAMAAAAOAAgAAAACAAMAAAAOAAcAAAACAAMAAAAOAAYAAAACAAAAAAAOAAUAAAADAAAAAAAOAAQAAAACAAMAAAAOAAMAAAACAAMAAAAPAAMAAAACAAMAAAAPAAQAAAACAAMAAAAPAAUAAAADAAAAAAAPAAYAAAACAAAAAAAPAAcAAAACAAMAAAAPAAgAAAACAAMAAAAPAAkAAAACAAMAAAAQAAkAAAACAAMAAAAQAAgAAAACAAMAAAAQAAcAAAACAAMAAAAQAAYAAAACAAAAAAAQAAUAAAADAAAAAAAQAAQAAAACAAMAAAAQAAMAAAACAAMAAAARAAMAAAACAAMAAAARAAQAAAACAAMAAAARAAUAAAADAAAAAAARAAYAAAACAAAAAAARAAcAAAACAAMAAAARAAgAAAACAAMAAAARAAkAAAACAAMAAAAIAAcAAAADAAEAAAAJAAcAAAABAAIAAAA=")
 tile_set = SubResource("TileSet_0lo44")
 
-[node name="Player" parent="Map" node_paths=PackedStringArray("dialogue_node", "map") instance=ExtResource("1_f7e23")]
+[node name="Player" parent="Map" node_paths=PackedStringArray("dialogue_node", "map") instance=ExtResource("2_pb58o")]
 position = Vector2(31, 186)
 dialogue_node = NodePath("../../Dialogue")
 map = NodePath("..")
 
-[node name="Path2D" type="Path2D" parent="Map"]
-curve = SubResource("Curve2D_lba0h")
-
-[node name="MalletSpawner" type="PathFollow2D" parent="Map/Path2D" node_paths=PackedStringArray("target")]
-position = Vector2(201.66, 301.154)
-rotation = 0.0030395
-progress = 314.769
-script = ExtResource("5_tcagk")
-mallet_scene = ExtResource("3_sp5ik")
-target = NodePath("../../Player")
-
-[node name="SpawnRate" type="Timer" parent="Map/Path2D/MalletSpawner"]
-wait_time = 2.0
-autostart = true
-
 [node name="Path2D2" type="Path2D" parent="Map"]
 curve = SubResource("Curve2D_se1d7")
 
-[node name="BossFacade" parent="Map/Path2D2" instance=ExtResource("5_717i2")]
+[node name="BossFacade" parent="Map/Path2D2" instance=ExtResource("5_6r8yl")]
 position = Vector2(285, 155)
 rotates = false
+cubic_interp = false
+loop = false
+wait_time = 0.5
 
-[node name="SceneLoader" parent="." instance=ExtResource("7_2ei0o")]
+[node name="SceneLoader" parent="." instance=ExtResource("6_dh4kb")]
 position = Vector2(288, -12)
 scale = Vector2(100, 50)
-scene = "res://hallway.tscn"
+scene = "res://Levels/hallway.tscn"
 
-[node name="SceneLoader2" parent="." instance=ExtResource("7_2ei0o")]
+[node name="SceneLoader2" parent="." instance=ExtResource("6_dh4kb")]
 position = Vector2(-18, 191)
 scale = Vector2(50, 100)
-scene = "res://start_level.tscn"
+scene = "res://Levels/start_level.tscn"
 
-[node name="Dialogue" parent="." instance=ExtResource("4_7g8jk")]
+[node name="Dialogue" parent="." instance=ExtResource("7_hxcpw")]
 visible = false
 text_arr = PackedStringArray("Wowza", "My name\'s Spike")
-
-[connection signal="timeout" from="Map/Path2D/MalletSpawner/SpawnRate" to="Map/Path2D/MalletSpawner" method="_on_spawn_rate_timeout"]

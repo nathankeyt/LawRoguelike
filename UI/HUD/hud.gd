@@ -8,6 +8,7 @@ extends Control
 
 
 func _ready() -> void:
+	health_bar.value = PlayerManager.health
 	PlayerManager.player_hit.connect(_on_player_hit)
 	#talk_tip_label.text = "Press to talk"
 

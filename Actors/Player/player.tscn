@@ -401,7 +401,7 @@ radius = 30.0167
 
 [node name="Player" type="CharacterBody2D" groups=["player", "targetable"]]
 z_index = 1
-collision_layer = 15
+collision_layer = 14
 motion_mode = 1
 script = ExtResource("1_iyvu0")
 dash_speed = 450.0
@@ -446,6 +446,10 @@ wait_time = 0.015
 sprite = NodePath("../Sprite2D")
 color = Color(1.15514e-06, 0.731041, 0.855588, 1)
 
+[node name="PostIFrameTime" type="Timer" parent="GhostTimer"]
+wait_time = 0.25
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("5_xhsbi")]
@@ -461,7 +465,8 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="DialogueCast" type="Area2D" parent="."]
-collision_layer = 15
+visible = false
+collision_layer = 13
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueCast"]
@@ -474,5 +479,6 @@ shape = SubResource("CircleShape2D_5b0h5")
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashResetTimer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="GhostTimer/PostIFrameTime" to="." method="_on_post_i_frame_time_timeout"]
 [connection signal="body_entered" from="DialogueCast" to="." method="_on_dialogue_cast_body_entered"]
 [connection signal="body_exited" from="DialogueCast" to="." method="_on_dialogue_cast_body_exited"]
