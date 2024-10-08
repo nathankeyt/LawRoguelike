@@ -75,7 +75,7 @@ func _on_survival_timer_timeout() -> void:
 	talk(mid_dialogue_node)
 	
 func _on_boss_1_phase_end() -> void:
-	if active_dialogue == start_dialogue_node:
+	if active_dialogue == last_dialogue_node:
 		$Map/Path2D/MalletSpawner.stop()
 		await get_tree().create_timer(1.0).timeout
 		boss.rotate(-PI/2)
